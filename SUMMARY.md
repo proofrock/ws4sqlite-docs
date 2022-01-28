@@ -2,7 +2,7 @@
 
 * [🌱 Introduction & Credits](README.md)
 * [🥇 Features](features.md)
-* [🏫 🧑🏫 Tutorial](tutorial.md)
+* [🏫 Tutorial](tutorial.md)
 * [🏗 Building & Testing](building-and-testing.md)
 * [🛡 Security](documentation/security.md)
 * [📖 Documentation](documentation/README.md)
