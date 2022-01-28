@@ -1,4 +1,4 @@
-#🏫 Tutorial
+# 🏫 Tutorial
 
 In this tutorial we'll run ws4sqlite for the first time, in order to serve a single database, and we'll run a couple of queries and statements against it.&#x20;
 
