@@ -1,8 +1,8 @@
 # 🐳 Docker
 
-WS4SQLite provides a standard Docker image, based on Alpine, at [Docker Hub](https://hub.docker.com/r/germanorizzo/ws4sqlite).&#x20;
+WS4SQLite provides a standard Docker image, based on Alpine, at [Docker Hub](https://hub.docker.com/r/germanorizzo/ws4sqlite).
 
-Since 0.8.0, it's available both for amd64 and for arm (32); for the latter, append `-arm` to the tag (e.g. `:latest-arm` or `:0.8.0-arm`).
+It's available both for amd64 and for arm (32); for the latter, append `-arm` to the tag (e.g. `:latest-arm` or `:0.9.0-arm`).
 
 Here are the relevant configurations:
 
