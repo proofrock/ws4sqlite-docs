@@ -17,6 +17,7 @@
   * [❌ Errors](documentation/errors.md)
   * [🔨 Maintenance](documentation/maintenance.md)
   * [🗝 Encryption](documentation/encryption.md)
+* [💡 Client Libraries](client-libraries.md)
 * [🎓 Advanced Topics](advanced-topics.md)
 * [🪐 Integrations](integrations/README.md)
   * [⚙ Reverse Proxy](integrations/reverse-proxy.md)

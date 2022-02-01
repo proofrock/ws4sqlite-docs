@@ -1,8 +1,14 @@
+---
+description: Query sqlite via http - and remote clients too!
+---
+
 # 🌱 Introduction & Credits
 
 **ws4sqlite** is a server-side application that, applied to one or more SQLite files, gives the possibility to perform SQL queries and statements on them via REST (or better, JSON over HTTP).
 
 Possible use cases are the ones where remote access to a sqlite db is useful/needed, for example a data layer for a remote application, possibly serverless or even called from a web page (_after security considerations_ of course).
+
+We are also building some client libraries that will abstract the "raw" JSON-based communication. See [here](https://github.com/proofrock/ws4sqlite-client-jvm) for Java/JVM, others will follow.
 
 As a quick example, after launching it on a file `mydatabase.db`, it's possible to make a POST call to `http://localhost:12321/mydatabase`, with the following body:
 

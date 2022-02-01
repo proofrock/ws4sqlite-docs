@@ -6,6 +6,10 @@ In the request it's necessary to specify a password to encrypt/decrypt the data,
 
 The data saved to the database are normal `TEXT` data, so a text/varchar column is enough.
 
+{% hint style="warning" %}
+Only TEXT fields can be encoded/decoded.
+{% endhint %}
+
 ### How To
 
 Let's suppose to have a table called `TEMP`, with an integer primary key named `ID` and a text column called `VAL`.
@@ -82,6 +86,18 @@ Notice that:
 * The 3rd request does specify decryption, so the original value is returned;
 * If we had specified the wrong decryption password, an error would have been generated, of course it's possible to use `noFail` to manage it.
 
+{% hint style="warning" %}
+Encryption can be applied only to `statement`s, while decryption only to `query`es \
+
+{% endhint %}
+
 ### Implementation
 
-For this function, the [crypgo ](https://github.com/proofrock/crypgo)library was used. Please refer to its documentation for the algorythms used.
+For this function, the [crypgo ](https://github.com/proofrock/crypgo)library was used, featuring:
+
+* **SCrypt** key derivation;
+* **XChaCha20-Poly1305** authenticated encryption;
+* **ZStd** compression;
+* **Base64** encoding.
+
+Please refer to its documentation for details.
