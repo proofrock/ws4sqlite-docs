@@ -1,11 +1,11 @@
 # 🏫 Tutorial
 
-In this tutorial we'll run ws4sqlite for the first time, in order to serve a single database, and we'll run a couple of queries and statements against it.&#x20;
+In this tutorial we'll run ws4sqlite for the first time, in order to serve a single database, and we'll run a couple of queries and statements against it.
 
 We'll use Linux, but the information here is "portable" to MacOS and Windows as well.
 
 {% hint style="success" %}
-If ws4sqlite offers a certain capability that is important to know but doesn't fit in a tutorial, it will be explained in an info box like this, and a link to the relevant documentation will be provided.
+If ws4sqlite offers a relevant capability that doesn't fit in a tutorial, it will be explained in an info box like this, and a link to the relevant documentation will be provided.
 {% endhint %}
 
 Let's start!
@@ -203,9 +203,9 @@ The following result is produced, signaling that the second statement failed; th
 
 ### 🎂 Queries With a Result (Set)
 
-Up to now, we tested only statements, that don't return results other than the number of affected rows. Let's see how to run a _query_.&#x20;
+Up to now, we tested only statements, that don't return results other than the number of affected rows. Let's see how to run a _query_.
 
-In the next example we will create a table, insert two rows in it, and read them.&#x20;
+In the next example we will create a table, insert two rows in it, and read them.
 
 {% hint style="warning" %}
 Please start from an empty database: kill ws4sqlite, remove the database file and start it again.

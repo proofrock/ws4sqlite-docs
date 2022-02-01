@@ -1,6 +1,7 @@
 # 🥇 Features
 
 * A [**single executable file**](documentation/installation/) (it's written in Go);
+* HTTP/JSON access, with [**client libraries**](client-libraries.md) for convenience;
 * Can load [**several databases**](documentation/configuration-file.md) at once, for convenience;
 * [**Batching** ](documentation/requests.md#batch-parameter-values-for-a-statement)of multiple values set for a single statement;
 * All queries of a call are executed in a [**transaction**](documentation/requests.md);
