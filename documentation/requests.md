@@ -5,10 +5,10 @@ A request is a JSON structure that is passed via a POST HTTP call to WS4SQLite, 
 First and foremost, the database we connect to is specified in the URL of the POST call. It is something like this:
 
 ```bash
-http://localhost:12321/databaseId
+http://localhost:12321/db2
 ```
 
-That `databaseId` must match the [`id`](configuration-file.md#id) of a database defined in the configuration file.
+That `db2` is the database ID, and must match the [`id`](configuration-file.md#id) of a database defined in the configuration file.
 
 This is a JSON that exemplifies all possible elements of a request (but for [encryption](encryption.md), to keep things simple).
 
