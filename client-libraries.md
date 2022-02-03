@@ -16,5 +16,5 @@ With clients, ws4qlite acts as a remote protocol for SQLite.
 We provide libraries for:
 
 * **Java/JDK**: [https://github.com/proofrock/ws4sqlite-client-jvm](https://github.com/proofrock/ws4sqlite-client-jvm)
-* **Go(lang)**: TBD
+* **Go(lang)**: [https://github.com/proofrock/ws4sqlite-client-go](https://github.com/proofrock/ws4sqlite-client-go)
 * **Javascript**: TBD
