@@ -1,7 +1,7 @@
 # Table of contents
 
 * [🌱 Introduction & Credits](README.md)
-* [🥇 Features](features/README.md)
+* [🥇 Features](features.md)
   * [🚄 Performances](features/performances.md)
 * [🏫 Tutorial](tutorial.md)
 * [🏗 Building & Testing](building-and-testing.md)
