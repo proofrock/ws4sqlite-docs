@@ -8,13 +8,13 @@ Going back to these snippets of[ the configuration file](configuration-file.md):
       mode: HTTP
       byCredentials:
         - user: myUser1
-          pass: myHotPassword
+          password: myHotPassword
         - user: myUser2
           hashedPass: b133a0c0e9bee3be20163d2ad31d6248db292aa6dcb1ee087a2aa50e0fc75a[e2
  [...]
     auth:
       mode: INLINE
-      byQuery: SELECT 1 FROM AUTH WHERE USER = :user AND PASS = :pass
+      byQuery: SELECT 1 FROM AUTH WHERE USER = :user AND PASSWORD = :password
 ```
 
 The `auth`nodes represent the structure that instructs ws4sqlite to protect that db with authentication.
@@ -42,7 +42,7 @@ You can see that there are two methods to configure the resolution of the creden
 
 * Provide a query that will be executed in the database, as in Line 12. \
   \
-  The query SQL must contain two placeholders, `:user` and `:pass`, that will be replaced by the server with the username and password provided by the client.\
+  The query SQL must contain two placeholders, `:user` and `:password`, that will be replaced by the server with the username and password provided by the client.\
   \
   If the query returns at least one result, the credentials are valid; if it returns 0 records, access will be denied.\
 
@@ -78,7 +78,7 @@ When a database is protected with authentication in [`INLINE` mode](authenticati
 {
     "credentials": {
         "user": "myUser1",
-        "pass": "myHotPassword"
+        "password": "myHotPassword"
     },
     [...]
 ```

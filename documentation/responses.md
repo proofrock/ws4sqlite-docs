@@ -62,7 +62,7 @@ A `query` is a statement that returns results in form of a result set.
 
 In the results, you can see a node named `resultSet`, an array of objects. Each object represents a record returned by the query, and is a map (key-value) of all the fields in the record. The key is the field name, as returned by the database, and the value is the (typed) field value.
 
-Notice that we selected for `*`, so the database auto-assigned the keys to the name of the columns.
+Notice that we selected for `*`, so the database auto-assigned the keys to the name of the fields.
 
 #### Result of a (non-Query) Statement
 
