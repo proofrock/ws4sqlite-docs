@@ -1,17 +1,14 @@
 # 🚄 Performances
 
-Tested ws4sqlite v0.9.0 with JMeter, on a Windows system (Dell XPS 13 9305).
+ws4sqlite v0.9.1 with Apache JMeter. Debian Linux system, Azure Standard B2s (2 vcpus).
 
-10000 requests in 100 bursts of 100 requests, 500ms ramp-up between requests. Single SELECT from a table with 1000 records, by primary key. Stored Statement used.
+Tested with 100, 1000, ... concurrent requests. Single SELECT on a file-based database, by primary key, on a 2000-records table. Fits in cache, WAL mode (not read only).
 
 ```
-# Samples	10000
-Average		1
-Median		1
-90% Line	2
-95% Line	3
-99% Line	14
-Minimum		0
-Maximum		24
-Error %		0.0
+   100 in 00:00:00 =  221.7/s Avg:    14 Min:     1 Max:    54 Err:     0 (0.00%)
+  1000 in 00:00:02 =  460.8/s Avg:     2 Min:     0 Max:    42 Err:     0 (0.00%)
+ 10000 in 00:00:12 =  834.1/s Avg:     1 Min:     0 Max:    82 Err:     0 (0.00%)
+100000 in 00:01:02 = 1621.1/s Avg:     0 Min:     0 Max:    54 Err:     0 (0.00%)
 ```
+
+Sub-millisecond response time, scales better than linear. Notice that requests to the underlying db are serialized.
