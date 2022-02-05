@@ -15,7 +15,7 @@ And a JSON object in the response body, similar to this:
 
 ```json
 {
-    "qryIdx": 1,
+    "reqIdx": 1,
     "message": "near \"SELECTS\": syntax error"
 }
 ```
@@ -30,7 +30,7 @@ For errors that are related not to a particular query, but to a general failure,
 
 ```json
 {
-    "qryIdx": -1,
+    "reqIdx": -1,
     "error": "wrong credentials"
 }
 ```

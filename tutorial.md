@@ -43,7 +43,7 @@ Some more options are possible: provide [authentication](documentation/authentic
 Let's now start the application:
 
 ```bash
-ws4sqlite --cfgDir ~/ws4sqlite_config
+ws4sqlite --cfg-dir ~/ws4sqlite_config
 ```
 
 Something like this will be printed; it gives information about what is now being served, and how.
@@ -158,7 +158,7 @@ Let's send over the last request again (don't remove the file!). The table alrea
 
 ```json
 {
-    "qryIdx": 0,
+    "reqIdx": 0,
     "error": "Table TEST_TABLE already exists",
 }
 ```

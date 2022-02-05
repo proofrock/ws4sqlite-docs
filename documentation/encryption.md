@@ -23,17 +23,17 @@ A simple request that saves some data in encrypted form and reads them both unde
             "statement": "INSERT INTO TEMP VALUES (:id, :val)",
             "values": { "id": 1, "val": "Secret!!" },
             "encoder": {
-                "pwd": "myPassword",
+                "password": "myPassword",
                 "compressionLevel": 6,
-                "columns": [ "val" ]
+                "fields": [ "val" ]
             }
         }, {
             "query": "SELECT ID, VAL FROM TEMP"
         }, {
             "query": "SELECT ID, VAL FROM TEMP",
             "decoder": {
-                "pwd": "myPassword",
-                "columns": [ "VAL" ]
+                "password": "myPassword",
+                "fields": [ "VAL" ]
             }
         }
     ]

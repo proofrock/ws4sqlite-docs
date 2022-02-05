@@ -1,6 +1,6 @@
 # 📃 Configuration File
 
-The configuration file is to be named `config.yaml`; the name is fixed, but the location can be specified with the [`--cfgDir`](running.md#cfgdir) commandline parameter. If not specified, ws4sqlite will look for it in the current working directory.
+The configuration file is to be named `config.yaml`; the name is fixed, but the location can be specified with the [`--cfg-dir`](running.md#cfg-dir) commandline parameter. If not specified, ws4sqlite will look for it in the current working directory.
 
 The configuration file specifies which database(s) are to be served, and all the settings for serving them. A complete example is as follows:
 
@@ -12,7 +12,7 @@ databases:
       mode: HTTP
       byCredentials:
         - user: myUser1
-          pass: myHotPassword
+          password: myHotPassword
         - user: myUser2
           hashedPass: b133a0c0e9bee3be20163d2ad31d6248db292aa6dcb1ee087a2aa50e0fc75ae2
     disableWALMode: true
@@ -27,7 +27,7 @@ databases:
     path: ":memory:"
     auth:
       mode: INLINE
-      byQuery: SELECT 1 FROM AUTH WHERE USER = :user AND PASS = :pass
+      byQuery: SELECT 1 FROM AUTH WHERE USER = :user AND PASSWORD = :password
     corsOrigin: https://myownsite.com
     useOnlyStoredStatements: false
     storedStatements:
@@ -36,7 +36,7 @@ databases:
       - id: Q2
         sql: INSERT INTO TEMP VALUES (:id, :val)
     initStatements:
-      - CREATE TABLE AUTH (USER TEXT PRIMARY KEY, PASS TEXT)
+      - CREATE TABLE AUTH (USER TEXT PRIMARY KEY, PASSWORD TEXT)
       - INSERT INTO AUTH VALUES ('myUser1', 'myHotPassword')
       - CREATE TABLE TEMP (ID INT PRIMARY KEY, VAL TEXT)
       - INSERT INTO TEMP (ID, VAL) VALUES (1, 'ONE'), (4, 'FOUR')

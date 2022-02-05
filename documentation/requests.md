@@ -16,7 +16,7 @@ This is a JSON that exemplifies all possible elements of a request (but for [enc
 {
     "credentials": {
         "user": "myUser1",
-        "pass": "myHotPassword"
+        "password": "myHotPassword"
     },
     "transaction": [
         {
@@ -83,7 +83,7 @@ See the [relevant section](stored-statements.md).
 
 _Lines 12, 20; object_\
 \
-If the query needs to be parametrized, named parameters can be defined in the statement using SQLite [syntax ](https://www.sqlite.org/c3ref/bind\_blob.html)(e.g. `:id` or `@id`), and the proper values for them must be specified here. You can specify values that do not match a parameter; they'll be ignored.
+If the query needs to be parametrized, named parameters can be defined in the statement using SQLite [syntax](https://www.sqlite.org/c3ref/bind\_blob.html)(e.g. `:id` or `@id`), and the proper values for them must be specified here. You can specify values that do not match a parameter; they'll be ignored.
 
 {% hint style="warning" %}
 What happens if some parameter values aren't defined in the `values` object? If there are _less_ parameter values than expected, it will give an error. If they are correct in number, but some parameter names don't match, the missing parameters will be assigned a value of `null`.

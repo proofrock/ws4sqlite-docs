@@ -7,12 +7,12 @@ Running WS4SQLite can be done via the commandline, and it's possible to specify 
 This is a complete commandline for WS4SQLite:
 
 ```
-ws4sqlite --cfgDir CFGDIR --bind-host 0.0.0.0 --port 12321
+ws4sqlite --cfg-dir CFGDIR --bind-host 0.0.0.0 --port 12321
 ```
 
 Of course, the usual `--help` and `--version` are supported. Let's discuss the other commandline parameters one by one.
 
-#### `--cfgDir`
+#### `--cfg-dir`
 
 Specifies where the [`config.yaml`](configuration-file.md) file is to be found. You can specify a relative or absolute path, and it's possible to use `~` to expand the user home.
 
