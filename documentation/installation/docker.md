@@ -35,3 +35,4 @@ The rest of the lines in this example are standard Docker.
 
 * You have to reference database and companion files that are in the directory mapped to `/data` as they were in `/data`;
 * The path for the database file should be absolute.
+ 
