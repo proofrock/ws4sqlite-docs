@@ -2,9 +2,9 @@
 
 Running ws4sqlite can be done via the commandline, and it's possible to specify its behaviour via commandline parameters.
 
-### Databases and Config (Companion) Files
+### Databases, `id`'s and Config (Companion) Files
 
-ws4sqlite behaviour when serving databases is configured with a mix of commandline parameters and naming conventions. You specify directly on the commandline the databases to serve, either specifying the path of the file (for file-based databases) or the id of the in-memory database. Then, for file paths, ws4sqlite will look for a "companion" configuration file TBD in YAML format that have the same base name of the database filename, but with `.yaml` extension. When present, it is used to load the serving parameters for that database.
+ws4sqlite behaviour when serving databases is configured with a mix of commandline parameters and naming conventions. You specify directly on the commandline the databases to serve, either specifying the path of the file (for file-based databases) or the id of the in-memory database. Then, for file paths, ws4sqlite will look for a ["companion" configuration file](configuration-file.md) in YAML format that have the same base name of the database filename, but with `.yaml` extension. When present, it is used to load the serving parameters for that database.
 
 For in-memory dbs, you indicate an id to be used for that database, followed - if needed - by the path of the companion file for the in-memory database, separated by a colon (`:`).
 
@@ -18,11 +18,11 @@ ws4sqlite --db ~/file1.db --mem-db mem1:~/mem1.yaml --mem-db mem2
 
 It will:
 
-- serve a db from `~/file1.db`, creating it if absent, with an id of `file1`;
-- look for `~/file1.yaml`, and - if present - load from there the configuration for this db;
-- serve a db from memory, with an id of `mem1`;
-- load its configuration from `~/mem1.yaml`;
-- serve a db from memory, with an id of `mem2`, and default configuration.
+* serve a db from `~/file1.db`, creating it if absent, with an id of `file1`;
+* look for `~/file1.yaml`, and - if present - load from there the configuration for this db;
+* serve a db from memory, with an id of `mem1`;
+* load its configuration from `~/mem1.yaml`;
+* serve a db from memory, with an id of `mem2`, and default configuration.
 
 ### Commandline Parameters
 
@@ -44,15 +44,15 @@ Port to use for incoming network communication. Defaults to `12321`.
 
 #### `--db`
 
-Can be repeated. 
+Can be repeated.
 
-Specifies one or more file paths to load and serve as SQLite db's. It will use the base name (without the `.db` suffix) as the id of the database, to use in the URL of the request TBD , and will look for a configuration/companion file in the same path, named `<id>.yaml`. 
+Specifies one or more file paths to load and serve as SQLite db's. It will use the base name (without the `.db` suffix) as the id of the database, to use in the URL of the [request](requests.md) , and will look for a configuration/companion file in the same path, named `<id>.yaml`.
 
 See the example above for a clearer explanation.
 
 #### `--mem-db`
 
-Can be repeated. 
+Can be repeated.
 
 Specifies one or more id for in-memory databases. Optionally, it's possible to specify also the path of the configuration file, after a colon (`:`).
 

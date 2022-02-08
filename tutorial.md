@@ -25,9 +25,7 @@ ws4sqlite --db testDb.db
 This tells ws4sqlite to serve a database, to be created because a file at the specified path doesn't exist, using default settings. It's now possible to access the database using its id, that is the filename minus the suffix (in this case, `testDb`).
 
 {% hint style="success" %}
-More than one database can be served from the same instance, and it's possible to create in-memory databases [TBD]. 
-Of course more options are possible: provide [authentication](documentation/authentication.md), open the file as [read only](documentation/configuration-file.md), [specify some queries/statements](documentation/stored-statements.md) on the server that can be referenced in requests, provide [TBD] initialization statements to apply when creating a database, and several more.
-This is done by creating a companion YAML file at the same path, called like the database but with a `.yaml` extension: `testDb.yaml` in our example.
+More than one database can be served from the same instance, and it's possible to create [in-memory databases](documentation/running.md#mem-db). Of course more options are possible: provide [authentication](documentation/authentication.md), open the file as [read only](documentation/configuration-file.md), [specify some queries/statements](documentation/stored-statements.md) on the server that can be referenced in requests, provide [initialization statements](documentation/configuration-file.md#initstatements) to apply when creating a database, and several more. This is done by creating a [companion YAML file](documentation/configuration-file.md) at the same path, called like the database but with a `.yaml` extension: `testDb.yaml` in our example.
 {% endhint %}
 
 When the app starts, something like this will be printed; it gives information about what is now being served, and how.

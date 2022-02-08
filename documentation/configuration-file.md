@@ -1,8 +1,8 @@
-# 📃 Configuration Files
+# 📃 Configuration File
 
 The configuration files are a set of companion files for each databases. They can be absent, and the database will take default values; if they are present, they indicate the parameters with which ws4sqlite must "treat" the database.
 
-For **file based db**s, the configuration file follows a naming convention: it must have the same path and filename of the db file, buit with a `.yaml` extension instead of `.db`. For **memory based db**s, the config files can be specified in the TBD `--mem-db` commandline argument.
+For **file based db**s, the configuration file follows a naming convention: it must have the same path and filename of the db file, buit with a `.yaml` extension instead of `.db`. For **memory based db**s, the config files can be specified in the [`--mem-db`](running.md#mem-db) commandline argument.
 
 The configuration is in YAML format. A couple of examples that describe the entire set of configurations are as follows:
 
