@@ -49,13 +49,11 @@ _Nodes 1 and 2_
 These nodes represent the result of the execution of a `query`. The corresponding requests were:
 
 ```json
-{
-  "query": "SELECT * FROM TEMP"
-},
+{ "query": "SELECT * FROM TEMP" },
 {
   "query": "SELECT * FROM TEMP WHERE ID = :id",
   "values": { "id": 1 }
- },
+},
 ```
 
 A `query` is a statement that returns results in form of a result set.
@@ -122,4 +120,4 @@ But this statement had two sets of values passed to it, a batch. We can see that
 "rowsUpdatedBatch": [ 1, 1 ]
 ```
 
-So, the server returns a rows updated count for every item of the batch, so for each iteration of the statement.
+So, the server returns a "rows updated" count for every item of the batch, aka for each iteration of the statement.

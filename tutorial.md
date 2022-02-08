@@ -12,45 +12,31 @@ Let's start!
 
 ### 🔧 Installation
 
-The installation is simple, as ws4sqlite "is" just an executable file. [Download ](https://github.com/proofrock/ws4sqlite/releases)or [build ](building-and-testing.md)it (matching your OS and architecture), and put it somewhere on the filesystem.
-
-Also, create a directory somewhere, with any name, that will contain the configuration file. Since you are there, create the file (it's called `config.yaml`).
-
-In Linux/MacOS:
-
-```bash
-mkdir ~/ws4sqlite_config
-cd ~/ws4sqlite_config
-touch config.yaml
-```
+The installation is simple, as ws4sqlite "is" just an executable file. [Download](https://github.com/proofrock/ws4sqlite/releases) or [build](building-and-testing.md) it (matching your OS and architecture), and put it somewhere on the filesystem.
 
 ### 🚀 First Run & Configuration
-
-Let's edit the `config.yaml` file we just created, with these contents:
-
-```yaml
-databases:
-  - id: testDb
-    path: ~/ws4sqlite_config/testDb.db
-```
-
-This file tells ws4sqlite to create a database `testDb.db` at the given path, and to assign an ID to it, `testDb`.
-
-{% hint style="success" %}
-Some more options are possible: provide [authentication](documentation/authentication.md), open the file as [read only](documentation/configuration-file.md), or [specify some queries/statements](documentation/stored-statements.md) on the server, that can be referenced in requests.
-{% endhint %}
 
 Let's now start the application:
 
 ```bash
-ws4sqlite --cfg-dir ~/ws4sqlite_config
+ws4sqlite --db testDb.db
 ```
 
-Something like this will be printed; it gives information about what is now being served, and how.
+This tells ws4sqlite to serve a database, to be created because a file at the specified path doesn't exist, using default settings. It's now possible to access the database using its id, that is the filename minus the suffix (in this case, `testDb`).
+
+{% hint style="success" %}
+More than one database can be served from the same instance, and it's possible to create in-memory databases [TBD]. 
+Of course more options are possible: provide [authentication](documentation/authentication.md), open the file as [read only](documentation/configuration-file.md), [specify some queries/statements](documentation/stored-statements.md) on the server that can be referenced in requests, provide [TBD] initialization statements to apply when creating a database, and several more.
+This is done by creating a companion YAML file at the same path, called like the database but with a `.yaml` extension: `testDb.yaml` in our example.
+{% endhint %}
+
+When the app starts, something like this will be printed; it gives information about what is now being served, and how.
 
 ```
 ws4sqlite x.y.z
-- Serving database 'testDb' from /home/mano/ws4sqlite_config/testDb.db?_journal=WAL
+- Serving database 'testDb' from testDb.db?_journal=WAL
+  + No config file loaded, using defaults
+  + File not present, it will be created
   + Using WAL
 - Web Service listening on 0.0.0.0:12321
 ```
@@ -58,16 +44,12 @@ ws4sqlite x.y.z
 The service is now active and serving requests. Use `Ctrl-c` to exit, as usual.
 
 {% hint style="success" %}
-From the commandline, it's also possible to specify the [port](documentation/running.md#port) and the [host ](documentation/running.md#bind-host)to bind to.
-{% endhint %}
-
-{% hint style="info" %}
-Since the db file is not present at the path given in the config file, it will be created.
+From the commandline, it's also possible to specify the [port](documentation/running.md#port) and the [host](documentation/running.md#bind-host) to bind to.
 {% endhint %}
 
 ### 🔍 First Request
 
-Let's now do something useful. Use a tool like [postman ](https://www.postman.com)to submit a POST call with this body to `http://localhost:12321/testDb`:
+Let's now do something useful. Use a tool like [postman](https://www.postman.com) to submit a POST call to `http://localhost:12321/testDb`, with the following body:
 
 ```json
 {
@@ -80,7 +62,7 @@ Let's now do something useful. Use a tool like [postman ](https://www.postman.co
 ```
 
 {% hint style="warning" %}
-Ensure that the header `Content-Type` is set to `application/json`
+Ensure that the header `Content-Type` is set to `application/json`!
 {% endhint %}
 
 Let's see what is in the request:
@@ -113,21 +95,17 @@ You did it! 🚀 Going through the response:
 Let's say you want to run multiple SQLs in the same request. As you may suspect, this is just a matter of adding another item to the `transaction` array:
 
 {% hint style="info" %}
-As the name implies, the queries/statements are run in a single transaction. It will be committed at the end of the call, and rolled back if an error occours (see [the relevant chapter](tutorial.md#managing-errors)).
-{% endhint %}
-
-{% hint style="warning" %}
-For this example, you'll need to start from a new db, so stop the application, remove the database file and start it again.
+As the name of the array implies, the queries/statements are run in a single transaction. It will be committed at the end of the call, and rolled back if an unmanaged error occours (see [the relevant chapter](tutorial.md#managing-errors)).
 {% endhint %}
 
 ```json
 {
     "transaction": [
         {
-            "statement": "CREATE TABLE TEST_TABLE (ID int primary key, VAL text)"
+            "statement": "CREATE TABLE TEST_TABLE_2 (ID int primary key, VAL text)"
         },
         {
-            "statement": "INSERT INTO TEST_TABLE (ID, VAL) VALUES (1, 'hello')"
+            "statement": "INSERT INTO TEST_TABLE_2 (ID, VAL) VALUES (1, 'hello')"
         }
     ]
 }
@@ -150,52 +128,52 @@ The response now has 2 elements in the array:
 }
 ```
 
-Please notice **Line 9**: `rowsUpdated` is 1, signaling that we updated one row with the `INSERT`.
+Please notice **Line 9**: `rowsUpdated` is 1, signaling that we affected one row with the `INSERT`.
 
 ### 🧯 Managing Errors
 
-Let's send over the last request again (don't remove the file!). The table already exists, so the response will now fail with `500 Internal Server Error` , and with the body:
+Let's send over the last request again (don't remove the file!). The table already exists, so the response will now fail with `500 Internal Server Error` , and with a body of:
 
 ```json
 {
     "reqIdx": 0,
-    "error": "Table TEST_TABLE already exists",
+    "error": "Table TEST_TABLE_2 already exists",
 }
 ```
 
 * **Line 2**: the (0-based) index of the statement that failed in the `queries` array; an index of `-1` would tell us that it's a generic error, not tied to a particular statement;
 * **Line 3**: the reason of the failure, as reported by SQLite.
 
-This is a general failure. As queries in the same request are run in transaction, the whole transaction is rolled back.
+This is a general failure. As statements in the same request are run in transaction, the whole transaction is rolled back.
 
-It's also possible to "allow" a single query to fail. The transaction will be completed, and an error will be reported only on that query. Notice the `"noFail"` in the second statement and send the following request:
+It's also possible to "allow" certain statements to fail. The transaction will be completed, and an error will be reported only on that statement. Send the following request, notice the `"noFail"` in the first statement:
 
 ```json
 {
     "transaction": [
         {
-            "statement": "INSERT INTO TEST_TABLE (ID, VAL) VALUES (2, 'ciao')"
+            "noFail": true,
+            "statement": "CREATE TABLE TEST_TABLE_2 (ID int primary key, VAL text)"
         },
         {
-            "noFail": true,
-            "statement": "CREATE TABLE TEST_TABLE (ID int primary key, VAL text)"
+            "statement": "INSERT INTO TEST_TABLE_2 (ID, VAL) VALUES (1, 'hello')"
         }
     ]
 }
 ```
 
-The following result is produced, signaling that the second statement failed; the transaction is committed anyway, so the first statement is actually persisted:
+The following result is produced, signaling that the first statement failed; the transaction is committed anyway, so the second statement is actually persisted:
 
 ```json
 {
     "results": [
         {
-            "success": true,
-            "rowsUpdated": 1
+            "success": false,
+            "error": "Table TEST_TABLE_2 already exists"
         },
         {
-            "success": false,
-            "error": "Table TEST_TABLE already exists"
+            "success": true,
+            "rowsUpdated": 1
         }
     ]
 }
@@ -208,7 +186,7 @@ Up to now, we tested only statements, that don't return results other than the n
 In the next example we will create a table, insert two rows in it, and read them.
 
 {% hint style="warning" %}
-Please start from an empty database: kill ws4sqlite, remove the database file and start it again.
+Please start from an empty database: stop ws4sqlite, remove the database file and start it again.
 {% endhint %}
 
 Request:
@@ -234,7 +212,7 @@ Request:
 ```json
 {
     "results": [
-        ...omitted the first tworesults...
+        ...omitted the first two results...
         {
             "success": true,
             "resultSet": [
@@ -252,10 +230,6 @@ Request:
 
 The last capability we'll cover is using parameters, either in a statement (e.g. an `INSERT`) or in a query. They are specified using named placeholders, like the following.
 
-{% hint style="warning" %}
-For this example, please use the database produced in the last step, as it has a table already defined.
-{% endhint %}
-
 ```json
 {
     "transaction": [
@@ -265,7 +239,7 @@ For this example, please use the database produced in the last step, as it has a
         },
         {
             "query": "SELECT * FROM TEST_TABLE WHERE ID = :id",
-            "values": { "ID": 101, "VAL": "A hundred and 1" }
+            "values": { "id": 101 }
         }
     ]
 }
@@ -273,10 +247,10 @@ For this example, please use the database produced in the last step, as it has a
 
 * **Line 4**: in the statement, we use named placeholders like `:id` ;
 * **Line 5**: we specify the actual values with a `values` object, containing a map with the keys being the placeholders;
-* Same with queries, as in the **Lines 8 and 9**.
+* Same with queries, as at **Line 9**.
 
 {% hint style="info" %}
-It may seem more verbose than specifying the values in the SQL, but it is _always_ the preferrable solution, allowing for example to avoid nasty [SQL injection bugs](https://xkcd.com/327/).
+Using placeholders may seem more verbose than specifying the values in the SQL, but it is _always_ the preferrable solution, allowing for example to avoid nasty [SQL injection bugs](https://xkcd.com/327/).
 {% endhint %}
 
 {% hint style="success" %}
@@ -293,10 +267,7 @@ For statements, it is also possible to specify multiple sets of values ('batches
         {
             "success": true,
             "resultSet": [
-                {
-                    "ID": 101,
-                    "VAL": null
-                }
+                { "ID": 101, "VAL": "A hundred and 1" }
             ]
         }
     ]
@@ -311,9 +282,9 @@ Thanks for reading so far, I hope you liked it! There are many more topics of in
 
 * Learn to protect your transactions with [authentication](documentation/authentication.md);
 * Use a [reverse proxy](integrations/reverse-proxy.md) for HTTPS and additional security;
-* Use [stored statements ](documentation/stored-statements.md)to avoid passing SQL from the client;
+* Use [stored statements](documentation/stored-statements.md) to avoid passing SQL from the client;
 * Perform scheduled maintenance activities, `VACUUM`s or backups;
-* Configure [CORS ](documentation/configuration-file.md#corsorigin)for more convenient access from a web page;
+* Configure [CORS](documentation/configuration-file.md#corsorigin) for more convenient access from a web page;
 * ...and much more!
 
 Have a nice day! ☀️

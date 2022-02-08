@@ -1,92 +1,72 @@
-# 📃 Configuration File
+# 📃 Configuration Files
 
-The configuration file is to be named `config.yaml`; the name is fixed, but the location can be specified with the [`--cfg-dir`](running.md#cfg-dir) commandline parameter. If not specified, ws4sqlite will look for it in the current working directory.
+The configuration files are a set of companion files for each databases. They can be absent, and the database will take default values; if they are present, they indicate the parameters with which ws4sqlite must "treat" the database.
 
-The configuration file specifies which database(s) are to be served, and all the settings for serving them. A complete example is as follows:
+For **file based db**s, the configuration file follows a naming convention: it must have the same path and filename of the db file, buit with a `.yaml` extension instead of `.db`. For **memory based db**s, the config files can be specified in the TBD `--mem-db` commandline argument.
+
+The configuration is in YAML format. A couple of examples that describe the entire set of configurations are as follows:
 
 ```yaml
-databases:
-  - id: db1
-    path: ~/first.db?_cache_size=-16000
-    auth:
-      mode: HTTP
-      byCredentials:
-        - user: myUser1
-          password: myHotPassword
-        - user: myUser2
-          hashedPass: b133a0c0e9bee3be20163d2ad31d6248db292aa6dcb1ee087a2aa50e0fc75ae2
-    disableWALMode: true
-    readOnly: false
-    maintenance:
-      schedule: 0 0 * * *
-      doVacuum: true
-      doBackup: true
-      backupTemplate: ~/first_%s.db
-      numFiles: 3
-  - id: db2
-    path: ":memory:"
-    auth:
-      mode: INLINE
-      byQuery: SELECT 1 FROM AUTH WHERE USER = :user AND PASSWORD = :password
-    corsOrigin: https://myownsite.com
-    useOnlyStoredStatements: false
-    storedStatements:
-      - id: Q1
-        sql: SELECT * FROM TEMP 
-      - id: Q2
-        sql: INSERT INTO TEMP VALUES (:id, :val)
-    initStatements:
-      - CREATE TABLE AUTH (USER TEXT PRIMARY KEY, PASSWORD TEXT)
-      - INSERT INTO AUTH VALUES ('myUser1', 'myHotPassword')
-      - CREATE TABLE TEMP (ID INT PRIMARY KEY, VAL TEXT)
-      - INSERT INTO TEMP (ID, VAL) VALUES (1, 'ONE'), (4, 'FOUR')
+auth:
+  mode: HTTP
+  byCredentials:
+    - user: myUser1
+      password: myCoolPassword
+    - user: myUser2
+      hashedPassword: b133a0c0e9bee3be20163d2ad31d6248db292aa6dcb1ee087a2aa50e0fc75ae2
+disableWALMode: true
+readOnly: false
+maintenance:
+  schedule: 0 0 * * *
+  doVacuum: true
+  doBackup: true
+  backupTemplate: ~/temp_%s.db
+  numFiles: 3
 ```
 
-The general structure is a list of objects, in the node `databases`. Each object represents a database to be served. A description of the fields (or areas) follows, with indication of the relevant lines in the example.
+And:
 
-If an error occurs, the application will exit with a status code of 1, after printing the error to stderr.
+```yaml
+auth:
+  mode: INLINE
+  byQuery: SELECT 1 FROM AUTH WHERE USER = :user AND PASSWORD = :password
+corsOrigin: https://myownsite.com
+useOnlyStoredStatements: true
+storedStatements:
+  - id: Q1
+    sql: SELECT * FROM TEMP 
+  - id: Q2
+    sql: INSERT INTO TEMP VALUES (:id, :val)
+initStatements:
+  - CREATE TABLE AUTH (USER TEXT PRIMARY KEY, PASSWORD TEXT)
+  - INSERT INTO AUTH VALUES ('myUser1', 'myCoolPassword')
+  - CREATE TABLE TEMP (ID INT PRIMARY KEY, VAL TEXT)
+  - INSERT INTO TEMP (ID, VAL) VALUES (1, 'ONE'), (4, 'FOUR')
+```
 
-#### `id`&#x20;
+A description of the fields (or areas) follows, with indication of the relevant lines in the example.
 
-_Lines 2, 19; string; mandatory_
-
-A String that indicates an handler for the database. Requests can address this database using this handler.
-
-No two databases can specify the same ID.
-
-#### `path`
-
-_Lines 3, 20; string; mandatory_
-
-Indicates the path of the SQLite file that contains the database.
-
-You can specify a relative or absolute path, and it's possible to use `~` to expand the user home.
-
-It can be `:memory:` or `file::memory:` for an in-memory database, as in line 18.
-
-It can also include URL parameters, as it does in line 3: see the [docs](../advanced-topics.md#pass-parameters-when-opening-a-database).
-
-If the file is not present, it will be attempted to create one. If the path is illegal, an error will be returned, and the application will exit.&#x20;
+If an error occurs while parsing them, the application will exit with a status code of 1, after printing the error to stderr.
 
 #### `auth`
 
-_Lines 4-10, 21-23; object_
+_Lines 1-7 of #1, 1-3 of #2; object_
 
 Configuration for the authentication. See the [relevant section](authentication.md).
 
 #### `disableWALMode`
 
-_Line 11; boolean_
+_Line 8 of #1; boolean_
 
-By default a database is opened in [WAL mode](https://sqlite.org/wal.html). This line instructs ws4sqlite to open the first database in rollback mode (i.e. non-WAL).
+By default a database is opened in [WAL mode](https://sqlite.org/wal.html). This line instructs ws4sqlite to open the database in rollback mode (i.e. non-WAL).
 
 #### `readOnly`
 
-_Line 12; boolean_
+_Line 9 of #1; boolean_
 
 If this boolean flag is present and set to true, the database will be treated as read-only. Only queries are allowed, that don't alter the database structure.
 
-Under the hood, this is performed by adding to the URL the following string:
+Under the hood, this is performed by adding to the URL the following [parameter string](https://github.com/mattn/go-sqlite3#connection-string):
 
 `?mode=ro&immutable=1&_query_only=1`
 
@@ -94,15 +74,15 @@ This is not compatibile with [`initStatements`](configuration-file.md#initstatem
 
 #### `maintenance`
 
-_Lines 13-18; object_
+_Lines 10-15 of #1; object_
 
-Instructs ws4sqlite on how (and if) to perform scheduled maintenance on this database. See the [relevant section](maintenance.md).
+If present, instructs ws4sqlite on how to perform scheduled maintenance on this database. See the [relevant section](maintenance.md).
 
 This can be specified only for non-[`readOnly`](configuration-file.md#readonly) databases.
 
 #### `corsOrigin`
 
-_Line 24; string_
+_Line 4 of #2; string_
 
 If specified, it enables serving CORS headers in the response, and specifies the value of the `Access-Control-Allow-Origin` header.
 
@@ -112,8 +92,8 @@ Used to both configure the server to serve CORS headers and, when non-`*`, restr
 
 #### `storedStatements` and `useOnlyStoredStatements`
 
-_`storedStatements`: Lines 26-30; object_\
-_`useOnlyStoredStatements`: Line 25; boolean_
+_`storedStatements`: Lines 6-10 of #2; object_\
+_`useOnlyStoredStatements`: Line 5 of #2; boolean_
 
 Stored Statements are a way to specify (some of) the statement/queries you will use in the server instead of sending them over from the client.
 
@@ -121,7 +101,7 @@ See the [relevant section](stored-statements.md).
 
 #### `initStatements`
 
-_Lines 31-33; list of strings_
+_Lines 11-13 of #2; list of strings_
 
 When creating a database, it's often useful or even necessary to initialize it. This node allows to list a series of statement that will be applied to a newly-created database.
 

@@ -4,7 +4,7 @@ description: ISC License
 
 # ⚖ License
 
-WS4SQLite is developed under the [ISC License](https://www.isc.org/licenses/)
+ws4sqlite is developed under the [ISC License](https://www.isc.org/licenses/)
 
 _Copyright (c) 2022-, Germano Rizzo <_[_oss@germanorizzo.it_](mailto:oss@germanorizzo.it)_>_
 

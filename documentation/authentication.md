@@ -8,9 +8,9 @@ Going back to these snippets of[ the configuration file](configuration-file.md):
       mode: HTTP
       byCredentials:
         - user: myUser1
-          password: myHotPassword
+          password: myCoolPassword
         - user: myUser2
-          hashedPass: b133a0c0e9bee3be20163d2ad31d6248db292aa6dcb1ee087a2aa50e0fc75a[e2
+          hashedPassword: b133a0c0e9bee3be20163d2ad31d6248db292aa6dcb1ee087a2aa50e0fc75a[e2
  [...]
     auth:
       mode: INLINE
@@ -48,12 +48,12 @@ You can see that there are two methods to configure the resolution of the creden
 
 * Provide a set of credentials in the config file itself, as in Lines 5-8.\
   \
-  You can specify the password as plain text (ensure that the file is not world-readable...) or as SHA-256 hashes. See [below ](authentication.md#generating-the-token)to learn how to hash passwords.
+  You can specify the password as plain text (ensure that the file is not world-readable...) or as SHA-256 hashes. See [below](authentication.md#generating-the-token) to learn how to hash passwords.
 
 The `auth` block is not mandatory. If provided, the database will be protected with it; if omitted, no authentication is requested. If you provide one, it will be ignored.
 
 {% hint style="danger" %}
-The password are passed in cleartext, so it is better to be on a protected connection like HTTPS (e.g. by using a reverse proxy). See the [security ](security.md#authentication)page for further information.
+The password are passed in cleartext, so it is better to be on a protected connection like HTTPS (e.g. by using a reverse proxy). See the [security](security.md#authentication) page for further information.
 {% endhint %}
 
 #### Generating hashes
@@ -78,7 +78,7 @@ When a database is protected with authentication in [`INLINE` mode](authenticati
 {
     "credentials": {
         "user": "myUser1",
-        "password": "myHotPassword"
+        "password": "myCoolPassword"
     },
     [...]
 ```

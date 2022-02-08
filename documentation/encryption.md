@@ -7,7 +7,7 @@ In the request it's necessary to specify a password to encrypt/decrypt the data,
 The data saved to the database are normal `TEXT` data, so a text/varchar column is enough.
 
 {% hint style="warning" %}
-Only TEXT fields can be encoded/decoded.
+Only TEXT fields can be encrypted/decrypted; encryption is reserved to `statement`s, decryption to `query`'s.
 {% endhint %}
 
 ### How To
@@ -44,12 +44,12 @@ Relevant structures are at Lines 6-10 for encryption, and at Lines 15-18 for dec
 
 Notice that:
 
-* The password is the same (Lines 7 and 16) and is specified as clear text (be sure to use a secure connection);
-* What to encode is specified as a list of fields from the `values` or `valuesBatch` nodes (Line 9). Fields that are not in this list will be saved as they are.
-* What to decode is specified as a list of fields from the resultset (Line 17).
-* Compression is requested, at Line 8. This is level `6`; valid levels are `1`-`19`. A level of 0 (or omitting the node) disable the compression.
-  * Compression is applied only if it actually reduces the size of the text; if it doesn't, it's discarded.
-* You don't need to specify that data are compressed, when decoding.
+* The password is the same (Lines 7 and 16) and is specified as clear text (be sure to use a secure connection!);
+* What to encode is specified as a list of fields from the `values` or `valuesBatch` nodes (Line 9). Fields that are not in this list will be saved as they are;
+* What to decode is specified as a list of fields from the resultset (Line 17);
+* Compression is requested, at Line 8. Here it is level `6`; valid levels are `1`-`19`. A level of 0 (or omitting the node) disable the compression;
+  * Compression is applied only if it actually reduces the size of the text; if it doesn't, it's discarded at runtime without feedback;
+* You don't need to specify if data are compressed, when decoding.
 
 The response is as this:
 
@@ -82,18 +82,13 @@ The response is as this:
 
 Notice that:
 
-* The 2nd request doesn't specify a decoder, so the response return the "raw" data in the field `VAL`. This is clearly not what you want;
+* The 2nd request doesn't specify a decoder, so the response return the "raw" data in the field `VAL`. **This is clearly not what you want**;
 * The 3rd request does specify decryption, so the original value is returned;
 * If we had specified the wrong decryption password, an error would have been generated, of course it's possible to use `noFail` to manage it.
 
-{% hint style="warning" %}
-Encryption can be applied only to `statement`s, while decryption only to `query`es \
-
-{% endhint %}
-
 ### Implementation
 
-For this function, the [crypgo ](https://github.com/proofrock/crypgo)library was used, featuring:
+For this function, the [crypgo](https://github.com/proofrock/crypgo) library was used, featuring:
 
 * **SCrypt** key derivation;
 * **XChaCha20-Poly1305** authenticated encryption;

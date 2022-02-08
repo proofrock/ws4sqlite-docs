@@ -9,14 +9,11 @@ This can be done to shorten the requests from the client; a more important reaso
 For any database, you can add a similar piece of YAML to specify one or more stored queries:
 
 ```yaml
-databases:
-  - id: db
-    [...]
-    storedQueries:
-      - id: Q1
-        sql: SELECT * FROM TABLE_1
-      - id: Q2
-        sql: SELECT * FROM TABLE_2 WHERE UPPER(cf) = UPPER(:cf)
+storedQueries:
+  - id: Q1
+    sql: SELECT * FROM TABLE_1
+  - id: Q2
+    sql: SELECT * FROM TABLE_2 WHERE UPPER(cf) = UPPER(:cf)
 ```
 
 As you can see, each stored query has an ID that you can use to refer to it from a request.
@@ -39,20 +36,18 @@ Of course, it's not limited to queries, but also `statement`s works the same.
 
 #### Limiting the server to executing stored queries
 
-Specify the relevant configuration (line 4):
+Specify the relevant configuration (line 2):
 
 ```yaml
-databases:
-  - id: db
-    [...]
-    useOnlyStoredQueries: true
-    storedQueries:
-    [...]
+[...]
+useOnlyStoredQueries: true
+storedQueries:
+[...]
 ```
 
 This way, the server will not accept any SQL from the client, but will only allow Stored Queries.
 
-A possible use case is this: you have a database with a table that lists some sensitive data for a key.&#x20;
+A possible use case is this: you have a database with a table that lists some sensitive data for a key.
 
 ```sql
 CREATE TABLE MY_SENSITIVE_TABLE (
@@ -61,18 +56,16 @@ CREATE TABLE MY_SENSITIVE_TABLE (
 )
 ```
 
-You want to avoid that the whole table is extracted, but keep it accessible for queries for a single key.
+You want to avoid that the whole table is extracted, but still keep it accessible for queries for a single key.
 
 Just define a query, and restrict the server to it:
 
 ```yaml
-databases:
-  - id: db
-    [...]
-    useOnlyStoredQueries: true
-    storedQueries:
-      - id: Q1
-        sql: SELECT MY SECRET FROM MY_SENSITIVE_TABLE WHERE MY_KEY = :key
+[...]
+useOnlyStoredQueries: true
+storedQueries:
+  - id: Q1
+    sql: SELECT MY SECRET FROM MY_SENSITIVE_TABLE WHERE MY_KEY = :key
 ```
 
-From the client, anyone will only be allowed to perform a lookup by key, so they'll need to know the key in order to access the data. No other queries are allowed.
+From the client, anyone will only be allowed to perform a lookup by key, so they'll need to know the key in order to access the data. No other queries are allowed, and no SQL can be passed from the client.

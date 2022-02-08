@@ -1,10 +1,10 @@
 # ⚙ Reverse Proxy
 
-Running a reverse proxy in front of ws4sqlite is almost mandatory if you want to expose it on the internet. More than that, there are a number of reverse proxies that allow you to protect an http connection with https, using a free certificate provided by [Let's Encrypt](https://letsencrypt.org) or similar.
+Running a reverse proxy in front of ws4sqlite is almost mandatory if you want to expose it on the internet. More than that, there are a number of reverse proxies that allow you to protect a http connection with https, using a free certificate provided for example by [Let's Encrypt](https://letsencrypt.org) or similar.
 
 Read more [here](../documentation/security.md#use-a-reverse-proxy-if-going-on-the-internet).
 
-We'll show here how to integrate with two popular solutions, [Caddy ](https://caddyserver.com)and [NGINX](https://www.nginx.com).
+We'll show here how to integrate with two popular solutions, [Caddy](https://caddyserver.com) and [NGINX](https://www.nginx.com).
 
 ### Caddy
 
