@@ -3,15 +3,15 @@
 Going back to this snippet of[ the configuration file](configuration-file.md):
 
 ```yaml
-    maintenance:
-      schedule: 0 0 * * *
-      doVacuum: true
-      doBackup: true
-      backupTemplate: ~/first_%s.db
-      numFiles: 3
+maintenance:
+  schedule: 0 0 * * *
+  doVacuum: true
+  doBackup: true
+  backupTemplate: ~/first_%s.db
+  numFiles: 3
 ```
 
-The `maintenance`node represent the structure that instructs ws4sqlite to provide scheduled maintenance. This means, a VACUUM or a backup - or both.
+The `maintenance` node represent the structure that tells ws4sqlite to provide scheduled maintenance. This means, a VACUUM or a backup - or both.
 
 {% hint style="warning" %}
 It's not possible to provide `maintenance` for [`readOnly`](configuration-file.md#readonly) databases. This is a design choice by SQLite; neither `VACUUM` nor `VACUUM INTO...` work in such databases.
@@ -21,21 +21,21 @@ It's not possible to provide `maintenance` for [`readOnly`](configuration-file.m
 
 _Line 2; string; mandatory_
 
-Cron-like string, standard 5-fields (no seconds). See [documentation ](https://www.adminschoice.com/crontab-quick-reference)for more details.
+Cron-like string, standard 5-fields (no seconds). See [documentation](https://www.adminschoice.com/crontab-quick-reference) for more details.
 
 #### `doVacuum`
 
 _Line 3; boolean_
 
-If present and set to `true`, performs a [`VACUUM` ](https://www.sqlite.org/lang\_vacuum.html)on the database.
+If present and set to `true`, performs a [`VACUUM`](https://www.sqlite.org/lang\_vacuum.html) on the database.
 
-**doBackup**
+#### `doBackup`
 
 _Line 4; boolean_
 
-If present and set to `true`, takes a snapshot of the database.&#x20;
+If present and set to `true`, takes a snapshot of the database.
 
-If `doVacuum` is `true`, the backup is taken after the `VACUUM`.
+If `doVacuum` is also `true`, the backup is taken after the `VACUUM`.
 
 The backup is created with the `VACUUM INTO...` command.
 

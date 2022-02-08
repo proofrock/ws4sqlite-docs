@@ -6,23 +6,23 @@ Here is a more detailed discussion of the various security features.
 
 The first and most effective line of defense is certainly authentication, [documented here](authentication.md).
 
-ws4sqlite allows a client to authenticate with it using a traditional credentials system. In other words, the client supplies an username, and a password.
+ws4sqlite allows a client to authenticate with it using a traditional credentials system. In other words, the client supplies an username and a password.
 
-The client can do this in two ways:
+The client can do this in one of two ways:
 
 * Using the standard HTTP Basic Authentication; or
 * Inserting the credentials in the request JSON.
 
 {% hint style="danger" %}
-Beware that the password is sent in plaintext; if you are serving a database on an unprotected connection, it could be snooped.
+Beware that the password is sent in plaintext; if you are serving a database on an unprotected connection, it could be snooped. Consider providing HTTPS with a reverse proxy.
 {% endhint %}
 
-On the server, the credentials can be supplied in two ways:
+On the server, the set of valid credentials can be configured in two ways:
 
 * Defining a list of credentials in the configuration file (the password can be plaintext or hashed);
 * Defining a SQL query that authenticates them, probably against a table in the database itself.
 
-This mechanism is flexible and effective. Of course, a password is only safe if it's kept secret, so if you connect from a web app, it can't be hard-coded in the javascript. A better approach would be to ask for it to the user.
+This mechanism is designed to be flexible and effective. Of course, a password is only safe if it's kept secret, so if you connect from a web app, it can't be hard-coded in the javascript. A better approach would be to ask for it to the user.
 
 ### Read-only databases
 
@@ -32,7 +32,7 @@ If you want to ensure that a database cannot be changed, even if access to it is
 
 If you call ws4sqlite from a web page, or even if you expose it on an unsecured channel, it's all too easy for someone to call it as if they were the web page, and execute random SQL on it.
 
-In such a case, it may be useful to [define ](stored-statements.md)a set of "safe" SQL statements, on the server, and [restrict ](configuration-file.md#useonlystoredqueries)_any_ client to use just them.
+In such a case, it may be useful to [define](stored-statements.md) a set of "safe" SQL statements, on the server, and [restrict](configuration-file.md#useonlystoredqueries) _any_ client to use just them.
 
 For example, suppose you have a database with a list of personal information, keyed by social security number. If someone "ask" with a valid SSN, you want to give them the information, but of course you don't want to allow anyone to extract the whole list.
 
@@ -58,4 +58,4 @@ All these measures are effective, but to complete them it's advisable to use HTT
 
 HTTPS configuration is _not_ part of ws4sqlite, because it would add a lot of code that is outside the scope of the application (KISS!). Instead, configure a reverse proxy to secure the HTTP connection - for example with a Let'sEncrypt certificate.
 
-Some options that are very easy to configure are [Caddy ](https://caddyserver.com)or [LinuxServer's Swag](https://docs.linuxserver.io/general/swag) Docker image. Documentation [here](../integrations/reverse-proxy.md).
+Some options that are very easy to configure are [Caddy](https://caddyserver.com) or [LinuxServer's Swag](https://docs.linuxserver.io/general/swag) Docker image. Documentation [here](../integrations/reverse-proxy.md).
