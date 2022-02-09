@@ -4,6 +4,7 @@
 * [🥇 Features](features.md)
   * [🚄 Performances](features/performances.md)
 * [🏫 Tutorial](tutorial.md)
+* [🔦 Cheat Sheet](cheat-sheet.md)
 * [🏗 Building & Testing](building-and-testing.md)
 * [🛡 Security](documentation/security.md)
 * [📖 Documentation](documentation/README.md)
