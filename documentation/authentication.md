@@ -40,12 +40,11 @@ _Lines 4-8, 12; object; mandatory_
 
 You can see that there are two methods to configure the resolution of the credentials on the server:
 
-* Provide a query that will be executed in the database, as in Line 12. \
+* Provide a query that will be executed in the database, as in Line 12.\
   \
   The query SQL must contain two placeholders, `:user` and `:password`, that will be replaced by the server with the username and password provided by the client.\
   \
-  If the query returns at least one result, the credentials are valid; if it returns 0 records, access will be denied.\
-
+  If the query returns at least one result, the credentials are valid; if it returns 0 records, access will be denied.\\
 * Provide a set of credentials in the config file itself, as in Lines 5-8.\
   \
   You can specify the password as plain text (ensure that the file is not world-readable...) or as SHA-256 hashes. See [below](authentication.md#generating-the-token) to learn how to hash passwords.
@@ -53,7 +52,7 @@ You can see that there are two methods to configure the resolution of the creden
 The `auth` block is not mandatory. If provided, the database will be protected with it; if omitted, no authentication is requested. If you provide one, it will be ignored.
 
 {% hint style="danger" %}
-The password are passed in cleartext, so it is better to be on a protected connection like HTTPS (e.g. by using a reverse proxy). See the [security](security.md#authentication) page for further information.
+The password are passed in cleartext, so it is better to be on a protected connection like HTTPS (e.g. by using a reverse proxy). See the [security](../security.md#authentication) page for further information.
 {% endhint %}
 
 #### Generating hashes

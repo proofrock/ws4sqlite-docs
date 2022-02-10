@@ -1,12 +1,12 @@
 # Table of contents
 
 * [🌱 Introduction & Credits](README.md)
-* [🥇 Features](features.md)
+* [🥇 Features](features/README.md)
   * [🚄 Performances](features/performances.md)
 * [🏫 Tutorial](tutorial.md)
 * [🔦 Cheat Sheet](cheat-sheet.md)
 * [🏗 Building & Testing](building-and-testing.md)
-* [🛡 Security](documentation/security.md)
+* [🛡 Security](security.md)
 * [📖 Documentation](documentation/README.md)
   * [🔧 Installation](documentation/installation/README.md)
     * [🐳 Docker](documentation/installation/docker.md)

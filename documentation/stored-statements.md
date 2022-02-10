@@ -2,7 +2,7 @@
 
 As stated while discussing the [configuration file](configuration-file.md#storedqueries-lines-26-30-and-useonlystoredqueries-line-25), Stored Queries are a way to specify (some of) the statement/queries you will use in the server instead of sending them over from the client.
 
-This can be done to shorten the requests from the client; a more important reason is for security: when coupled with the next parameter, this allows the server to actually limit the SQL tat is performed to a set of predefined, controlled values. If your db contains areas that are sensitive, and you don't want to expose them, this can be very effective. See also the [relevant section](security.md#stored-queries-to-prevent-sql-injection).
+This can be done to shorten the requests from the client; a more important reason is for security: when coupled with the next parameter, this allows the server to actually limit the SQL tat is performed to a set of predefined, controlled values. If your db contains areas that are sensitive, and you don't want to expose them, this can be very effective. See also the [relevant section](../security.md#stored-queries-to-prevent-sql-injection).
 
 #### Configuration
 

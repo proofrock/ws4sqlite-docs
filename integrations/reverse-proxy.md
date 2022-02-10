@@ -2,7 +2,7 @@
 
 Running a reverse proxy in front of ws4sqlite is almost mandatory if you want to expose it on the internet. More than that, there are a number of reverse proxies that allow you to protect a http connection with https, using a free certificate provided for example by [Let's Encrypt](https://letsencrypt.org) or similar.
 
-Read more [here](../documentation/security.md#use-a-reverse-proxy-if-going-on-the-internet).
+Read more [here](../security.md#use-a-reverse-proxy-if-going-on-the-internet).
 
 We'll show here how to integrate with two popular solutions, [Caddy](https://caddyserver.com) and [NGINX](https://www.nginx.com).
 
@@ -21,7 +21,7 @@ You'll need to launch caddy with root/admin privileges, as it must access privil
 
 ### NGINX
 
-NGINX is quite complex to configure, and it's beyond the scope of this document. Usually, we make use of  [LinuxServer's Swag](https://docs.linuxserver.io/general/swag) Docker image, paired with ws4sqlite's own docker image. The relevant config is in `nginx/site-confs/default`:
+NGINX is quite complex to configure, and it's beyond the scope of this document. Usually, we make use of [LinuxServer's Swag](https://docs.linuxserver.io/general/swag) Docker image, paired with ws4sqlite's own docker image. The relevant config is in `nginx/site-confs/default`:
 
 ```nginx
 server {
