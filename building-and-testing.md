@@ -1,19 +1,20 @@
 # 🏗 Building & Testing
 
-WS4SQlite is distributed with binaries for the major combinations of OSs and architectures, or better, the ones I can access ;-). I'm trying to do portable builds as much as possible. For these reasons, building ws4sqlite is generally not required, but it could be useful for those archs I don't have access to (hello, macos/aarch64!), and to ensure that the binary matches the sources.
+WS4SQlite is distributed with binaries for the major combinations of OSs and architectures, or better, the ones I can access ;-). I'm trying to do portable builds as much as possible. For these reasons, building ws4sqlite is generally not required, but it could be useful for those archs I don't have access to, and to ensure that the binary matches the sources.
 
 ### Supported platforms
 
 These are platforms for which we'll provide binaries at the time of the release.
 
-| OS      | Arch    | Notes                                       |
-| ------- | ------- | ------------------------------------------- |
-| Linux   | x86-64  | Static build for cross-distro compatibility |
-| Linux   | armv7hf | Static build for cross-distro compatibility |
-| Windows | x86-64  |                                             |
-| MacOS   | x86-64  |                                             |
+| OS             | Arch    | Notes                                                                              |
+| -------------- | ------- | ---------------------------------------------------------------------------------- |
+| Linux          | x86-64  | Static build for cross-distro compatibility                                        |
+| Linux          | armv7hf | Static build for cross-distro compatibility                                        |
+| Windows        | x86-64  |                                                                                    |
+| MacOS (darwin) | x86-64  |                                                                                    |
+| MacOS (darwin) | arm64   | Availability may take some days after release - credits to D. Quinto for packaging |
 
-If you have access to an unsupported architecture, and would like to contribute the binary, please write me (oss AT germanorizzo DOT it).
+If you have access to an unsupported architecture, and would like to contribute the binary, please write me (oss /AT/ germanorizzo /DOT/ it).
 
 ### Building
 

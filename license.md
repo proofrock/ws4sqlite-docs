@@ -6,7 +6,7 @@ description: ISC License
 
 ws4sqlite is developed under the [ISC License](https://www.isc.org/licenses/)
 
-_Copyright (c) 2022-, Germano Rizzo <_[_oss@germanorizzo.it_](mailto:oss@germanorizzo.it)_>_
+_Copyright (c) 2022-, Germano Rizzo \<oss /AT/ germanorizzo /DOT/ it>_
 
 _Permission to use, copy, modify, and/or distribute this software for any purpose with or without fee is hereby granted, provided that the above copyright notice and this permission notice appear in all copies._
 
