@@ -1,9 +1,10 @@
 # 🥇 Features
 
+* Aligned to [**SQLite 3.38.0**](https://sqlite.org/releaselog/3\_38\_0.html);
 * A [**single executable file**](https://germ.gitbook.io/ws4sqlite/documentation/installation) (written in Go);
 * HTTP/JSON access, with [**client libraries**](https://germ.gitbook.io/ws4sqlite/client-libraries) for convenience;
 * Directly call `ws4sqlite` on a database (as above), many options available using a YAML companion file;
-* \[**In-memory DBs**] are supported (https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#path);
+* ****[**In-memory DBs**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#path) are supported;
 * Serving of [**multiple databases**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file) in the same server instance;
 * [**Batching**](https://germ.gitbook.io/ws4sqlite/documentation/requests#batch-parameter-values-for-a-statement) of multiple value sets for a single statement;
 * All queries of a call are executed in a [**transaction**](https://germ.gitbook.io/ws4sqlite/documentation/requests);
@@ -15,7 +16,7 @@
 * Provide [**initialization statements**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#initstatements) to execute when a DB is created;
 * [**WAL**](https://sqlite.org/wal.html) mode enabled by default, can be [disabled](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#disablewalmode);
 * [Quite fast](performances.md)!
-* Compact codebase (\~850 lines of code);
+* Compact codebase;
 * Comprehensive test suite (`make do-test`);
 * [**Docker images**](https://germ.gitbook.io/ws4sqlite/documentation/installation/docker), both for amd64 and arm32.
 

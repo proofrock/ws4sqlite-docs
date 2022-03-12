@@ -2,7 +2,7 @@
 
 ws4sqlite provides a standard Docker image, based on Alpine, at [Docker Hub](https://hub.docker.com/r/germanorizzo/ws4sqlite).
 
-It's available both for amd64 and for arm (32); for the latter, append `-arm` to the tag (e.g. `:latest-arm` or `:0.11.0-arm`). 
+It's available for amd64, ARM and ARM64. Append `-arm` or `-arm64` to the usual tags (e.g. `:latest-arm`, `:0.11.2-arm64`).
 
 Here are the relevant configurations:
 
@@ -35,4 +35,3 @@ The rest of the lines in this example are standard Docker.
 
 * You have to reference database and companion files that are in the directory mapped to `/data` as they were in `/data`;
 * The path for the database file should be absolute.
- 

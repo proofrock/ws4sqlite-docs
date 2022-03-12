@@ -10,6 +10,7 @@ These are platforms for which we'll provide binaries at the time of the release.
 | -------------- | ------- | ---------------------------------------------------------------------------------- |
 | Linux          | x86-64  | Static build for cross-distro compatibility                                        |
 | Linux          | armv7hf | Static build for cross-distro compatibility                                        |
+| Linux          | aarch64 | Static build for cross-distro compatibility                                        |
 | Windows        | x86-64  |                                                                                    |
 | MacOS (darwin) | x86-64  |                                                                                    |
 | MacOS (darwin) | arm64   | Availability may take some days after release - credits to D. Quinto for packaging |
