@@ -25,3 +25,4 @@
   * [⚙ Reverse Proxy](integrations/reverse-proxy.md)
 * [⚖ License](license.md)
 * [👷 GitHub Repository](https://github.com/proofrock/ws4sqlite)
+* [🚁 Support on Discord](https://discord.gg/nBCcq2VQPu)
