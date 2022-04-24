@@ -1,6 +1,6 @@
 # 🥇 Features
 
-* Aligned to [**SQLite 3.38.0**](https://sqlite.org/releaselog/3\_38\_0.html);
+* Aligned to [**SQLite 3.38.2**](https://sqlite.org/releaselog/3\_38\_2.html);
 * A [**single executable file**](https://germ.gitbook.io/ws4sqlite/documentation/installation) (written in Go);
 * HTTP/JSON access, with [**client libraries**](https://germ.gitbook.io/ws4sqlite/client-libraries) for convenience;
 * Directly call `ws4sqlite` on a database (as above), many options available using a YAML companion file;
@@ -15,10 +15,11 @@
 * Builtin [**encryption**](https://germ.gitbook.io/ws4sqlite/documentation/encryption) of fields, given a symmetric key;
 * Provide [**initialization statements**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#initstatements) to execute when a DB is created;
 * [**WAL**](https://sqlite.org/wal.html) mode enabled by default, can be [disabled](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#disablewalmode);
-* [Quite fast](performances.md)!
+* ****[**Quite fast**](performances.md)!
 * Compact codebase;
-* Comprehensive test suite (`make do-test`);
-* [**Docker images**](https://germ.gitbook.io/ws4sqlite/documentation/installation/docker), both for amd64 and arm32.
+* Comprehensive test suite (`make test`);
+* 9 os's/arch's directly supported;
+* [**Docker images**](https://germ.gitbook.io/ws4sqlite/documentation/installation/docker), for amd64, arm and arm64.
 
 ### Security Features
 

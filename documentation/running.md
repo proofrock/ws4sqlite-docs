@@ -24,6 +24,10 @@ It will:
 * load its configuration from `~/mem1.yaml`;
 * serve a db from memory, with an id of `mem2`, and default configuration.
 
+{% hint style="info" %}
+Since version 0.11.3, any extension can be used database file. Before that version, only `.db` could be used.
+{% endhint %}
+
 ### Commandline Parameters
 
 This is a complete commandline for ws4sqlite:

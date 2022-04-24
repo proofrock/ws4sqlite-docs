@@ -13,10 +13,6 @@ maintenance:
 
 The `maintenance` node represent the structure that tells ws4sqlite to provide scheduled maintenance. This means, a VACUUM or a backup - or both.
 
-{% hint style="warning" %}
-It's not possible to provide `maintenance` for [`readOnly`](configuration-file.md#readonly) databases. This is a design choice by SQLite; neither `VACUUM` nor `VACUUM INTO...` work in such databases.
-{% endhint %}
-
 #### `schedule`
 
 _Line 2; string; mandatory_

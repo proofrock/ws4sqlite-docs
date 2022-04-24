@@ -8,10 +8,9 @@ description: Query sqlite via http - and remote clients too!
 
 Possible use cases are the ones where remote access to a sqlite db is useful/needed, for example a data layer for a remote application, possibly serverless or even called from a web page (_after security considerations_ of course).
 
-Client libraries are available, that will abstract the "raw" JSON-based communication. See 
-[here](https://github.com/proofrock/ws4sqlite-client-jvm) for Java/JVM, [here](https://github.com/proofrock/ws4sqlite-client-go) for Go(lang); others will follow.
+Client libraries are available, that will abstract the "raw" JSON-based communication. See [here](https://github.com/proofrock/ws4sqlite-client-jvm) for Java/JVM, [here](https://github.com/proofrock/ws4sqlite-client-go) for Go(lang); others will follow.
 
-As a quick example, after launching 
+As a quick example, after launching
 
 ```bash
 ws4sqlite --db mydatabase.db
@@ -56,11 +55,13 @@ Obtaining an answer of:
 
 Many thanks and all the credits to these awesome projects:
 
-- [lnquy's cron](https://github.com/lnquy/cron) (MIT License);
-- [robfig's cron](https://github.com/robfig/cron) (MIT License);
-- [gofiber's fiber](https://github.com/gofiber/fiber) (MIT License);
-- [mitchellh's go-homedir](https://github.com/mitchellh/go-homedir) (MIT License);
-- [mattn's go-sqlite3](https://github.com/mattn/go-sqlite3) (MIT License);
-- [wI2L's jettison](https://github.com/wI2L/jettison) (MIT License)
-- [DataDog's zstd](https://github.com/DataDog/zstd) (Simplified BSD license);
-- and of course, [Google Go](https://go.dev), [VS Code](https://code.visualstudio.com) and [CodeServer](https://github.com/coder/code-server)!
+* [lnquy's cron](https://github.com/lnquy/cron) (MIT License);
+* [robfig's cron](https://github.com/robfig/cron) (MIT License);
+* [gofiber's fiber](https://github.com/gofiber/fiber) (MIT License);
+* [klauspost's compress](https://github.com/klauspost/compress) (3-Clause BSD license);
+* [mitchellh's go-homedir](https://github.com/mitchellh/go-homedir) (MIT License);
+* [modernc.org's sqlite](https://gitlab.com/cznic/sqlite) (3-Clause BSD License);
+* [wI2L's jettison](https://github.com/wI2L/jettison) (MIT License)
+* and of course, [Google Go](https://go.dev).
+
+Kindly supported by [JetBrains for Open Source development](https://jb.gg/OpenSourceSupport)

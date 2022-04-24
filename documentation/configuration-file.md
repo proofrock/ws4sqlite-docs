@@ -60,25 +60,21 @@ _Line 8 of #1; boolean_
 
 By default a database is opened in [WAL mode](https://sqlite.org/wal.html). This line instructs ws4sqlite to open the database in rollback mode (i.e. non-WAL).
 
+Under the hood, this is performed by using the `journal_mode=WAL` pragma.
+
 #### `readOnly`
 
 _Line 9 of #1; boolean_
 
 If this boolean flag is present and set to true, the database will be treated as read-only. Only queries are allowed, that don't alter the database structure.
 
-Under the hood, this is performed by adding to the URL the following [parameter string](https://github.com/mattn/go-sqlite3#connection-string):
-
-`?mode=ro&immutable=1&_query_only=1`
-
-This is not compatibile with [`initStatements`](configuration-file.md#initstatements) and [`maintenance`](configuration-file.md#maintenance). Also, a read-only, in-memory db doesn't make much sense.
+Under the hood, this is performed by using the `query_only=true` pragma.
 
 #### `maintenance`
 
 _Lines 10-15 of #1; object_
 
 If present, instructs ws4sqlite on how to perform scheduled maintenance on this database. See the [relevant section](maintenance.md).
-
-This can be specified only for non-[`readOnly`](configuration-file.md#readonly) databases.
 
 #### `corsOrigin`
 
