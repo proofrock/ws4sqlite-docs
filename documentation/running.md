@@ -62,12 +62,17 @@ Specifies one or more id for in-memory databases. Optionally, it's possible to s
 
 See the example above for a clearer explanation.
 
+#### `--serve-dir`
+
+Specifies a directory to serve via the internal web server. See the [relevant docs page](https://germ.gitbook.io/ws4sqlite/documentation/web-server).
+
 ### Output
 
 ws4sqlite will parse the commandline and the (eventual) [config files](configuration-file.md), attempt to open and connect to the various databases, creating their respective files as needed. Then it will output a summary of all the configurations, like this:
 
 ```
 ws4sqlite x.y.z
+- Serving directory '/my/web/contents'
 - Serving database 'db1' from /data/db1.db?_journal=WAL
   + Parsed companion config file
   + Using WAL

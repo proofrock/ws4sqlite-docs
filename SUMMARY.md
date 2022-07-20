@@ -19,6 +19,7 @@
   * [❌ Errors](documentation/errors.md)
   * [🔨 Maintenance](documentation/maintenance.md)
   * [🗝 Encryption](documentation/encryption.md)
+  * [🌐 Embedded Web Server](documentation/web-server.md)
 * [💡 Client Libraries](client-libraries.md)
 * [🎓 Advanced Topics](advanced-topics.md)
 * [🪐 Integrations](integrations/README.md)
