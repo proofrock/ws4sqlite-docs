@@ -17,7 +17,6 @@ The web server is configured with the following capabilities:
 |---------------------|--------------|
 | Default resource    | `index.html` |
 | Byte range requests | Enabled      |
-| Download            | Enabled      |
 | Dir. navigation     | Disabled     |
 | Compression         | Disabled     |
 | Max age             | Disabled     |
