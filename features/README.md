@@ -1,10 +1,10 @@
 # 🥇 Features
 
-* Aligned to [**SQLite 3.38.2**](https://sqlite.org/releaselog/3\_38\_2.html);
+* Aligned to [**SQLite 3.38.5**](https://sqlite.org/releaselog/3\_38\_5.html);
 * A [**single executable file**](https://germ.gitbook.io/ws4sqlite/documentation/installation) (written in Go);
 * HTTP/JSON access, with [**client libraries**](https://germ.gitbook.io/ws4sqlite/client-libraries) for convenience;
 * Directly call `ws4sqlite` on a database (as above), many options available using a YAML companion file;
-* \*\*\*\*[**In-memory DBs**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#path) are supported;
+* [**In-memory DBs**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#path) are supported;
 * Serving of [**multiple databases**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file) in the same server instance;
 * [**Batching**](https://germ.gitbook.io/ws4sqlite/documentation/requests#batch-parameter-values-for-a-statement) of multiple value sets for a single statement;
 * All queries of a call are executed in a [**transaction**](https://germ.gitbook.io/ws4sqlite/documentation/requests);
@@ -15,7 +15,7 @@
 * Builtin [**encryption**](https://germ.gitbook.io/ws4sqlite/documentation/encryption) of fields, given a symmetric key;
 * Provide [**initialization statements**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#initstatements) to execute when a DB is created;
 * [**WAL**](https://sqlite.org/wal.html) mode enabled by default, can be [disabled](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#disablewalmode);
-* ****[**Embedded web server**](../documentation/web-server.md) to directly serve web pages that can access ws4sqlite without CORS;
+* [**Embedded web server**](../documentation/web-server.md) to directly serve web pages that can access ws4sqlite without CORS;
 * Quite fast!
 * Compact codebase;
 * Comprehensive test suite (`make test`);
