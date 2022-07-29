@@ -64,7 +64,7 @@ See the example above for a clearer explanation.
 
 #### `--serve-dir`
 
-Specifies a directory to serve via the internal web server. See the [relevant docs page](https://germ.gitbook.io/ws4sqlite/documentation/web-server).
+Specifies a directory to serve via the internal web server. See the [relevant docs page](web-server.md).
 
 ### Output
 
