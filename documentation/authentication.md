@@ -82,4 +82,4 @@ When a database is protected with authentication in [`INLINE` mode](authenticati
     [...]
 ```
 
-If the token verification fails, the response will be returned after 2 seconds, to prevent brute forcing. The wait time is per database: different failed requests for the same database will "stack", while different databases will work concurrently.
+If the token verification fails, the response will be returned after 1 second, to prevent brute forcing. The wait time is per database: different failed requests for the same database will "stack", while different databases will work concurrently.
