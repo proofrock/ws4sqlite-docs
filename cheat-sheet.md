@@ -8,18 +8,19 @@ ws4sqlite
     --port 12321 \               # Optional
     --db ~/file1.db \            # File-based db, cfg at ~/file1.yaml
     --mem-db mem1:~/mem1.yaml \  # Memory-based db, with cfg
-    --mem-db mem2                # Memory-based db, with default cfg
+    --mem-db mem2 \              # Memory-based db, with default cfg
+    --serve-dir myDir            # Serve static resources from a filesystem directory
 ```
 
 ## Configuration file
 
 ```yaml
-# Every first-level element is optional
+# All the first-level elements are optional (auth, disableWALMODE, ...)
 auth:
-  mode: HTTP                   # INLINE or HTTP
-  # Or byCredentials; query must have :user and :password
+  mode: HTTP                      # INLINE or HTTP
+  # Specify one of byQuery or byCredentials
   byQuery: SELECT 1 FROM AUTH WHERE USER = :user AND PASSWORD = :password
-  byCredentials:                  # Or byQuery:
+  byCredentials:                  # The query must have :user and :password
     - user: myUser1
       password: myCoolPassword
     - user: myUser2
@@ -27,10 +28,11 @@ auth:
 disableWALMode: true
 readOnly: true
 maintenance:
-  schedule: 0 0 * * *             # Cron format without seconds
+  schedule: 0 0 * * *             # Cron format without seconds (m h d m wd)
   doVacuum: true
   doBackup: true
-  backupTemplate: ~/temp_%s.db    # %s must be present, yyyyMMdd_HHmm
+  backupTemplate: ~/temp_%s.db    # a placeholder %s must be present, 
+                                  #  it will be replaced with yyyyMMdd_HHmm
   numFiles: 3                     # Backup files to keep 
 corsOrigin: https://myownsite.com # Access-Control-Allow-Origin
 useOnlyStoredStatements: true     
@@ -39,7 +41,7 @@ storedStatements:
     sql: SELECT * FROM TEMP 
   - id: Q2
     sql: INSERT INTO TEMP VALUES (:id, :val)
-initStatements:                   # Executed when a db is new
+initStatements:                   # These statements will be executed when a db is created
   - CREATE TABLE AUTH (USER TEXT PRIMARY KEY, PASSWORD TEXT)
   - INSERT INTO AUTH VALUES ('myUser1', 'myCoolPassword')
   - CREATE TABLE TEMP (ID INT PRIMARY KEY, VAL TEXT)
@@ -65,7 +67,7 @@ Content-Type: application/json
 
 ```json
 {
-    "credentials": {                      // If auth.mode == INLINE
+    "credentials": {                      // Necessary if and only if auth.mode == INLINE
         "user": "myUser1",
         "password": "myCoolPassword"
     },
@@ -86,7 +88,7 @@ Content-Type: application/json
             "values": { "id": 1, "val": "a" }
         },
         {
-            "statement": "#Q2",            // # + ID of the Stored Statement
+            "statement": "#Q2",            // '#' + the ID of the Stored Statement
             "valuesBatch": [
                 { "id": 2, "val": "b" },
                 { "id": 3, "val": "c" }
