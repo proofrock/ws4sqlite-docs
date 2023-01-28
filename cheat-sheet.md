@@ -18,6 +18,7 @@ ws4sqlite
 # All the first-level elements are optional (auth, disableWALMODE, ...)
 auth:
   mode: HTTP                      # INLINE or HTTP
+  customErrorCode: 499            # If 401 is not optimal
   # Specify one of byQuery or byCredentials
   byQuery: SELECT 1 FROM AUTH WHERE USER = :user AND PASSWORD = :password
   byCredentials:                  # The query must have :user and :password
