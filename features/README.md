@@ -19,7 +19,7 @@
 * Quite fast!
 * Compact codebase;
 * Comprehensive test suite (`make test`);
-* 9 os's/arch's directly supported;
+* 10 os's/arch's directly supported;
 * [**Docker images**](https://germ.gitbook.io/ws4sqlite/documentation/installation/docker), for amd64, arm and arm64.
 
 ### Security Features
