@@ -26,6 +26,10 @@ _Line 3; boolean; mandatory this as true or `schedule`_
 
 If true, performs a maintenance routine at engine startup.
 
+{% hint style="info" %}
+It is possible that ws4sqlite is started two times in the same minute; in this case, the backup file _won't be overwritten_.
+{% endhint %}
+
 #### `doVacuum`
 
 _Line 4; boolean_
