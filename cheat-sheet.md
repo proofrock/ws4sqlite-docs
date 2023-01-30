@@ -33,9 +33,12 @@ maintenance:
   atStartup: false                # This (as true) or schedule must be present
   doVacuum: true
   doBackup: true
-  backupTemplate: ~/temp_%s.db    # a placeholder %s must be present, 
+  backupTemplate: ~/temp_%s.db    # A placeholder %s must be present, 
                                   #  it will be replaced with yyyyMMdd_HHmm
   numFiles: 3                     # Backup files to keep 
+  statements:                     # SQL Statements to execute at every maintenance run
+    - DELETE FROM myTable WHERE tstamp < CURRENT_TIMESTAMP - 3600
+    - ...
 corsOrigin: https://myownsite.com # Access-Control-Allow-Origin
 useOnlyStoredStatements: true     
 storedStatements:

@@ -18,10 +18,14 @@ disableWALMode: true
 readOnly: false
 maintenance:
   schedule: 0 0 * * *
+  atStartup: false
   doVacuum: true
   doBackup: true
   backupTemplate: ~/temp_%s.db
   numFiles: 3
+  statements:
+    - DELETE FROM myTable WHERE tstamp < CURRENT_TIMESTAMP - 3600
+    - ...
 ```
 
 And:
@@ -72,7 +76,7 @@ Under the hood, this is performed by using the `query_only=true` pragma.
 
 #### `maintenance`
 
-_Lines 10-15 of #1; object_
+_Lines 10-18 of #1; object_
 
 If present, instructs ws4sqlite on how to perform scheduled maintenance on this database. See the [relevant section](maintenance.md).
 
