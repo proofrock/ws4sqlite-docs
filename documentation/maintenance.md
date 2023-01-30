@@ -97,5 +97,6 @@ _Lines 8-10; list of strings_
 A set of SQL statements (without parameters) to execute. 
 
 {% hint style="warning" %}
-The statements are not run in a transaction: if one fails, the next one will be executed, as with `initStatements`.
+The statements are not run in a transaction: if one fails, the next one will be executed, as with `initStatements`. On
+the other hand, there is a mutex that ensures that the statements' block is not executed concurrently to a request.
 {% endhint %}
