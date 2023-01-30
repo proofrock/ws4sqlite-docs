@@ -29,7 +29,7 @@ auth:
 disableWALMode: true
 readOnly: true
 maintenance:
-  schedule: 0 0 * * *             # Cron format without seconds (m h d m wd)
+  schedule: "0 0 * * *"           # Cron format without seconds (m h d m wd)
   atStartup: false                # This (as true) or schedule must be present
   doVacuum: true
   doBackup: true

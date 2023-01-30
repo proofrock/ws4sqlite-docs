@@ -4,7 +4,7 @@ Going back to this snippet of [the configuration file](configuration-file.md):
 
 ```yaml
 maintenance:
-  schedule: 0 0 * * *
+  schedule: "0 0 * * *"
   atStartup: false
   doVacuum: true
   doBackup: true
@@ -38,6 +38,10 @@ We'll now discuss the configurations.
 _Line 2; string; mandatory this or `atStartup` as true_
 
 Cron-like string, standard 5-fields (no seconds). See [documentation](https://www.adminschoice.com/crontab-quick-reference) for more details.
+
+{% hint style="warning" %}
+It's always better to put double quotes (`"`) around the chron expression, as `*` is a special character for YAML.
+{% endhint %}
 
 #### `atStartup`
 

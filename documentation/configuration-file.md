@@ -17,7 +17,7 @@ auth:
 disableWALMode: true
 readOnly: false
 maintenance:
-  schedule: 0 0 * * *
+  schedule: "0 0 * * *"
   atStartup: false
   doVacuum: true
   doBackup: true
@@ -86,7 +86,7 @@ _Line 4 of #2; string_
 
 If specified, it enables serving CORS headers in the response, and specifies the value of the `Access-Control-Allow-Origin` header.
 
-It can be set to `*`.
+It can be set to `*`. In this case, beware to put double quotes (`"*"`) as the asterisk is a special character for YAML.
 
 Used to both configure the server to serve CORS headers and, when non-`*`, restrict access to calls from a single, trusted web address.
 
