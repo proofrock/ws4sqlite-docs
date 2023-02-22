@@ -1,27 +1,34 @@
-# 🔨 Maintenance
+# 🔨 Scheduled Tasks
+
+{% hint style="warning" %}
+Since v0.14; this is an evolution of the former `maintenance` configuration, allowing for multiple schedulings. The old
+form is deprecated but still supported for retrocompatibility; a warning will be displayed when using it, and an error
+if both forms are used.
+{% endhint %}
 
 Going back to this snippet of [the configuration file](configuration-file.md):
 
 ```yaml
-maintenance:
-  schedule: "0 0 * * *"
-  atStartup: false
-  doVacuum: true
-  doBackup: true
-  backupTemplate: ~/first_%s.db
-  numFiles: 3
-  statements:
-    - DELETE FROM myTable WHERE tstamp < CURRENT_TIMESTAMP - 3600
-    - ... 
+scheduledTasks:
+  - schedule: "0 0 * * *"
+    doVacuum: true
+    doBackup: true
+    backupTemplate: ~/first_%s.db
+    numFiles: 3
+    statements:
+      - DELETE FROM myTable WHERE tstamp < CURRENT_TIMESTAMP - 3600
+      - ... 
+  - atStartup: true
+    doVacuum: true
 ```
 
-The `maintenance` node represent the structure that tells ws4sqlite to provide scheduled maintenance. This maintenance
-can be:
+The `scheduledTasks` node represent the structure that tells ws4sqlite to provide execute tasks in a scheduled fashion.
+This can be useful for maintenance, for example; each task can be:
 
 - scheduled, with a cron-like syntax; and/or
 - performed at startup.
 
-The maintenance itself can be comprised of one or more of:
+The task itself can be comprised of one or more of:
 
 - a VACUUM, to optimize and cleanup the internal structures;
 - a backup, rotated as needed;
@@ -31,13 +38,14 @@ The last feature in particular is very powerful, in that it allows to perform st
 for example you need to generate a sort of "run id" for one particular run, the relevant SQL can be executed at each
 startup of the server.
 
-We'll now discuss the configurations.
+It's a list of objects. We'll now discuss the configurations of each node of the list.
 
 #### `schedule`
 
-_Line 2; string; mandatory this or `atStartup` as true_
+_Line 2; string; it's mandatory to set either this or `atStartup` (as true)_
 
-Cron-like string, standard 5-fields (no seconds). See [documentation](https://www.adminschoice.com/crontab-quick-reference) for more details.
+Cron-like string, standard 5-fields (no seconds). 
+See [documentation](https://www.adminschoice.com/crontab-quick-reference) for more details.
 
 {% hint style="warning" %}
 It's always better to put double quotes (`"`) around the chron expression, as `*` is a special character for YAML.
@@ -45,13 +53,9 @@ It's always better to put double quotes (`"`) around the chron expression, as `*
 
 #### `atStartup`
 
-_Line 3; boolean; mandatory this as true or `schedule`_
+_Line 3, 10; boolean; it's mandatory to set either this (as true) or `schedule`_
 
-If true, performs a maintenance routine at engine startup.
-
-{% hint style="info" %}
-It is possible that ws4sqlite is started two times in the same minute; in this case, the backup file _won't be overwritten_.
-{% endhint %}
+If present and set to `true`, performs the task at engine startup.
 
 #### `doVacuum`
 
@@ -63,17 +67,22 @@ If present and set to `true`, performs a [`VACUUM`](https://www.sqlite.org/lang\
 
 _Line 5; boolean_
 
-If present and set to `true`, takes a snapshot of the database.
+If present and set to `true`, performs a backup of the database according to the scheduling and the configurations.
 
-If `doVacuum` is also `true`, the backup is taken after the `VACUUM`.
+If `doVacuum` is also `true`, the backup is taken _after_ the `VACUUM`.
 
 The backup is created with the `VACUUM INTO...` command.
 
 The following parameters tell ws4sqlite how to manage the backup(s).
 
+{% hint style="info" %}
+Depending on the configurations, it is possible that ws4sqlite creates more than one backup in the same minute; in this
+case, the policy id _not_ to overwrite an existing file.
+{% endhint %}
+
 #### backupTemplate
 
-_Line 6; string; mandatory if `doBackup` is `TRUE`_
+_Line 6; string; mandatory if `doBackup` is `true`_
 
 Filename (with path) of the backup files. It must contain a single `%s` that will be replaced with the minute of the 
 backup, in `yyyyMMdd-HHmm` format. For example:
@@ -81,12 +90,6 @@ backup, in `yyyyMMdd-HHmm` format. For example:
 `../myFile_%s.db` will be generated as `../myFile_20220127-1330.db`
 
 `~` is expanded to the user's home directory path.
-
-{% hint style="warning" %}
-If the same pattern is specified for different databases (it doesn't make much sense, but still) it is possible that
-ws4sqlite generates the same backup file more than once. In this case, the first backup file "wins" and _won't be
-overwritten_. The order of operations is deterministic but unspecified; so it's much better to avoid the situation.
-{% endhint %}
 
 #### numFiles
 

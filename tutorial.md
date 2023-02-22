@@ -281,7 +281,7 @@ Thanks for reading so far, I hope you liked it! There are many more topics of in
 * Learn to protect your transactions with [authentication](documentation/authentication.md);
 * Use a [reverse proxy](integrations/reverse-proxy.md) for HTTPS and additional security;
 * Use [stored statements](documentation/stored-statements.md) to avoid passing SQL from the client;
-* Perform scheduled maintenance activities, `VACUUM`s or backups;
+* Perform scheduled activities, that is: sql statements, `VACUUM`s or backups;
 * Configure [CORS](documentation/configuration-file.md#corsorigin) for more convenient access from a web page;
 * ...and much more!
 

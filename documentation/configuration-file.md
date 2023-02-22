@@ -16,16 +16,17 @@ auth:
       hashedPassword: b133a0c0e9bee3be20163d2ad31d6248db292aa6dcb1ee087a2aa50e0fc75ae2
 disableWALMode: true
 readOnly: false
-maintenance:
-  schedule: "0 0 * * *"
-  atStartup: false
-  doVacuum: true
-  doBackup: true
-  backupTemplate: ~/temp_%s.db
-  numFiles: 3
-  statements:
-    - DELETE FROM myTable WHERE tstamp < CURRENT_TIMESTAMP - 3600
-    - ...
+scheduledTasks:
+  - schedule: "0 0 * * *"
+    doVacuum: true
+    doBackup: true
+    backupTemplate: ~/first_%s.db
+    numFiles: 3
+    statements:
+      - DELETE FROM myTable WHERE tstamp < CURRENT_TIMESTAMP - 3600
+      - ...
+  - atStartup: true
+    doVacuum: true
 ```
 
 And:
@@ -74,11 +75,11 @@ If this boolean flag is present and set to true, the database will be treated as
 
 Under the hood, this is performed by using the `query_only=true` pragma.
 
-#### `maintenance`
+#### `scheduledTasks`
 
-_Lines 10-18 of #1; object_
+_Lines 10-20 of #1; object_
 
-If present, instructs ws4sqlite on how to perform scheduled maintenance on this database. See the [relevant section](maintenance.md).
+If present, instructs ws4sqlite to perform scheduled tasks on this database. See the [relevant section](sched_tasks.md).
 
 #### `corsOrigin`
 
