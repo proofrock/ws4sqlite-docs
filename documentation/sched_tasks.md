@@ -28,7 +28,7 @@ This can be useful for maintenance, for example; each task can be:
 - scheduled, with a cron-like syntax; and/or
 - performed at startup.
 
-The task itself can be comprised of one or more of:
+The task itself can be comprised of one or more actions, i.e.:
 
 - a VACUUM, to optimize and cleanup the internal structures;
 - a backup, rotated as needed;
@@ -37,6 +37,11 @@ The task itself can be comprised of one or more of:
 The last feature in particular is very powerful, in that it allows to perform statements at startup, or repeatedly; if
 for example you need to generate a sort of "run id" for one particular run, the relevant SQL can be executed at each
 startup of the server.
+
+{% hint style="info" %}
+If multiple actions are configured for a task, they are executed in the following order: first the VACUUM, then the 
+backup, then the sql statements (in the order they're listed).
+{% endhint %}
 
 It's a list of objects. We'll now discuss the configurations of each node of the list.
 
@@ -69,8 +74,6 @@ _Line 5; boolean_
 
 If present and set to `true`, performs a backup of the database according to the scheduling and the configurations.
 
-If `doVacuum` is also `true`, the backup is taken _after_ the `VACUUM`.
-
 The backup is created with the `VACUUM INTO...` command.
 
 The following parameters tell ws4sqlite how to manage the backup(s).
@@ -95,7 +98,8 @@ backup, in `yyyyMMdd-HHmm` format. For example:
 
 _Line 7; number; mandatory if `doBackup` is `TRUE`_
 
-Indicates how many files to keep for each database. After the limit is reached, the files rotate, with the least recent files being deleted.
+Indicates how many files to keep for each database. After the limit is reached, the files rotate, with the least 
+recent files being deleted.
 
 ### statements
 
