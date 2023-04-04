@@ -1,6 +1,6 @@
 # 🥇 Features
 
-* Aligned to [**SQLite 3.41.0**](https://sqlite.org/releaselog/3\_41\_0.html);
+* Aligned to [**SQLite 3.41.2**](https://sqlite.org/releaselog/3\_41\_2.html);
 * A [**single executable file**](https://germ.gitbook.io/ws4sqlite/documentation/installation) (written in Go);
 * HTTP/JSON access, with [**client libraries**](https://germ.gitbook.io/ws4sqlite/client-libraries) for convenience;
 * Directly call `ws4sqlite` on a database (as above), many options available using a YAML companion file;
