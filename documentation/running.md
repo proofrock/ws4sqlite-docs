@@ -50,15 +50,19 @@ Port to use for incoming network communication. Defaults to `12321`.
 
 Can be repeated.
 
-Specifies one or more file paths to load and serve as SQLite db's. It will use the base name (without the `.db` suffix) as the id of the database, to use in the URL of the [request](requests.md) , and will look for a configuration/companion file in the same path, named `<id>.yaml`.
+Specifies one or more file paths to load and serve as SQLite db's. It will use the base name (without the `.db` suffix)
+as the id of the database, to use in the URL of the [request](requests.md) , and will look for a configuration/companion
+file in the same path, named `<id>.yaml`.
 
-See the example above for a clearer explanation.
+It is also possible to specify a companion file at a different path, by specifying it after a colon (`:`).  Example: 
+`--db myFile.db:/another/path/myFileConfig.yaml`.
 
 #### `--mem-db`
 
 Can be repeated.
 
-Specifies one or more id for in-memory databases. Optionally, it's possible to specify also the path of the configuration file, after a colon (`:`).
+Specifies one or more id for in-memory databases. Optionally, it's possible to specify also the path of the configuration
+file, after a colon (`:`).
 
 See the example above for a clearer explanation.
 
