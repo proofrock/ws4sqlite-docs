@@ -1,18 +1,19 @@
 # 🥇 Features
 
-* Aligned to [**SQLite 3.41.2**](https://sqlite.org/releaselog/3\_41\_2.html);
+* Aligned to [**SQLite 3.45.1**](https://sqlite.org/releaselog/3\_45\_1.html);
 * A [**single executable file**](https://germ.gitbook.io/ws4sqlite/documentation/installation) (written in Go);
 * HTTP/JSON access, with [**client libraries**](https://germ.gitbook.io/ws4sqlite/client-libraries) for convenience;
 * Directly call `ws4sqlite` on a database (as above), many options available using a YAML companion file;
 * [**In-memory DBs**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#path) are supported;
 * Serving of [**multiple databases**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file) in the same server instance;
 * [**Batching**](https://germ.gitbook.io/ws4sqlite/documentation/requests#batch-parameter-values-for-a-statement) of multiple value sets for a single statement;
+* **Parameters** may be passed to statements positionally (lists) or by name (maps);
+* **Results** of queries may be returned as key-value maps, or as values lists;
 * All queries of a call are executed in a [**transaction**](https://germ.gitbook.io/ws4sqlite/documentation/requests);
 * For each query/statement, specify if a failure should rollback the whole transaction, or the failure is [**limited**](https://germ.gitbook.io/ws4sqlite/documentation/errors#managed-errors) to that query;
 * "[**Stored Statements**](https://germ.gitbook.io/ws4sqlite/documentation/stored-statements)": define SQL in the server, and call it from the client;
 * [**CORS**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#corsorigin) mode, configurable per-db;
 * [**Scheduled tasks**](https://germ.gitbook.io/ws4sqlite/documentation/sched_tasks) (VACUUM, sql or backups), also configurable per-db;
-* Builtin [**encryption**](https://germ.gitbook.io/ws4sqlite/documentation/encryption) of fields, given a symmetric key;
 * Provide [**initialization statements**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#initstatements) to execute when a DB is created;
 * [**WAL**](https://sqlite.org/wal.html) mode enabled by default, can be [disabled](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#disablewalmode);
 * [**Embedded web server**](../documentation/web-server.md) to directly serve web pages that can access ws4sqlite without CORS;

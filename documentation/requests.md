@@ -10,7 +10,7 @@ http://localhost:12321/db2
 
 That `db2` part is the database ID, and must match the `id` of a database, defined in the [commandline](running.md#databases-and-config-companion-files).
 
-This is a JSON that exemplifies all possible elements of a request (but for [encryption](encryption.md), to keep things simple).
+This is a JSON that exemplifies all possible elements of a request.
 
 ```json
 {

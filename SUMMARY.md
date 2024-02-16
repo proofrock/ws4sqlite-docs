@@ -18,7 +18,6 @@
   * [❗ Responses](documentation/responses.md)
   * [❌ Errors](documentation/errors.md)
   * [🔨 Scheduled Tasks](documentation/sched_tasks.md)
-  * [🗝 Encryption](documentation/encryption.md)
   * [🌐 Embedded Web Server](documentation/web-server.md)
 * [💡 Client Libraries](client-libraries.md)
 * [🎓 Advanced Topics](advanced-topics.md)

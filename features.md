@@ -6,13 +6,14 @@
 - [**In-memory DBs**] are supported (https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#path);
 - Serving of [**multiple databases**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file) in the same server instance;
 - [**Batching**](https://germ.gitbook.io/ws4sqlite/documentation/requests#batch-parameter-values-for-a-statement) of multiple value sets for a single statement;
+- **Parameters** may be passed to statements positionally (lists) or by name (maps);
+- **Results** of queries may be returned as key-value maps, or as values lists;
 - All queries of a call are executed in a [**transaction**](https://germ.gitbook.io/ws4sqlite/documentation/requests);
 - For each query/statement, specify if a failure should rollback the whole transaction, or the failure is [**limited**](https://germ.gitbook.io/ws4sqlite/documentation/errors#managed-errors) to that query;
 - "[**Stored Statements**](https://germ.gitbook.io/ws4sqlite/documentation/stored-statements)": define SQL in the server, and call it from the client;
 - [**CORS**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#corsorigin) mode, configurable per-db;
 - [**Scheduled tasks**](https://germ.gitbook.io/ws4sqlite/documentation/sched_tasks), cron-like and/or at startup, also configurable per-db;
 - Scheduled tasks can be: backup (with rotation), vacuum and/or a set of SQL statements;
-- Builtin [**encryption**](https://germ.gitbook.io/ws4sqlite/documentation/encryption) of fields, given a symmetric key;
 - Provide [**initialization statements**](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#initstatements) to execute when a DB is created;
 - [**WAL**](https://sqlite.org/wal.html) mode enabled by default, can be [disabled](https://germ.gitbook.io/ws4sqlite/documentation/configuration-file#disablewalmode);
 - [**Embedded web server**](https://germ.gitbook.io/ws4sqlite/documentation/web-server) to directly serve web pages that can access ws4sqlite without CORS;- [Quite fast](features/performances.md)!
