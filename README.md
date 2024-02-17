@@ -2,11 +2,13 @@
 description: Query sqlite via http - and remote clients too!
 ---
 
-> *This project has now a reimplementarion in Rust, called `sqliterg`, at [**sqliterg.dev**](https://docs.sqliterg.dev). It is not a 1:1 rewrite, but I tried to fix some concepts that I feel I got wrong here; plus it's smaller, (even) faster, (even) less memory-hungry and it can be built with an embedded sqlite or using the one on the system. You should feel at home with it, anyway a [migration guide is here](https://docs.sqliterg.dev/features/migrating-from-ws4sqlite).*
-
-> *`ws4sqlite` is **not really** deprecated, it will continue to receive libraries updates (about monthly), but probably not new features.*
-
 # 🌱 Introduction & Credits
+
+> _This project has now a reimplementarion in Rust, called `sqliterg`, at_ [_**sqliterg.dev**_](https://docs.sqliterg.dev)_. It is not a 1:1 rewrite, but I tried to fix some concepts that I feel I got wrong here; plus it's smaller, (even) faster, (even) less memory-hungry and it can be built with an embedded sqlite or using the one on the system. You should feel at home with it, anyway a_ [_migration guide is here_](https://docs.sqliterg.dev/features/migrating-from-ws4sqlite)_._
+
+> _`ws4sqlite` is **not really** deprecated, it will continue to receive libraries updates (about monthly), but probably not new features._
+
+## 🌱 Introduction & Credits
 
 **ws4sqlite** is a server-side application that, applied to one or more SQLite files, allows to perform SQL queries and statements on them via REST (or better, JSON over HTTP).
 
@@ -22,7 +24,8 @@ ws4sqlite --db mydatabase.db
 
 It's possible to make a POST call to `http://localhost:12321/mydatabase`, e.g. with the following body:
 
-```json
+```json5
+// Set Content-type: application/json
 {
     "transaction": [
         {
@@ -55,7 +58,7 @@ Obtaining an answer of:
 }
 ```
 
-### Credits
+#### Credits
 
 Many thanks and all the credits to these awesome projects:
 
