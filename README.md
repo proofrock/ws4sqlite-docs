@@ -4,9 +4,7 @@ description: Query sqlite via http - and remote clients too!
 
 # 🌱 Introduction & Credits
 
-> _This project has now a reimplementarion in Rust, called `sqliterg`, at_ [_**sqliterg.dev**_](https://docs.sqliterg.dev)_. It is not a 1:1 rewrite, but I tried to fix some concepts that I feel I got wrong here; plus it's smaller, (even) faster, (even) less memory-hungry and it can be built with an embedded sqlite or using the one on the system. You should feel at home with it, anyway a_ [_migration guide is here_](https://docs.sqliterg.dev/features/migrating-from-ws4sqlite)_._
-
-> _`ws4sqlite` is **not really** deprecated, it will continue to receive libraries updates (about monthly), but probably not new features._
+> _I recently started a_ [_discussion_](https://github.com/proofrock/ws4sqlite/discussions/44) _over the future direction for this project. Take a look, and chip in if you want!_
 
 ## 🌱 Introduction & Credits
 
