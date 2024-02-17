@@ -7,6 +7,7 @@ If you followed all of the chapters until now, in particular if you used[ the co
     "results": [
         {
             "success": true,
+            "resultHeaders": [ "ID", "VAL" ],
             "resultSet": [
                 { "ID": 1, "VAL": "ONE" },
                 { "ID": 4, "VAL": "FOUR" }
@@ -14,6 +15,7 @@ If you followed all of the chapters until now, in particular if you used[ the co
         },
         {
             "success": true,
+            "resultHeaders": [ "ID", "VAL" ],
             "resultSet": [
                 { "ID": 1, "VAL": "ONE" }
             ]
@@ -52,13 +54,17 @@ These nodes represent the result of the execution of a `query`. The correspondin
 { "query": "SELECT * FROM TEMP" },
 {
   "query": "SELECT * FROM TEMP WHERE ID = :id",
-  "values": { "id": 1 }
+  "values": [ 1 ]
 },
 ```
 
 A `query` is a statement that returns results in form of a result set.
 
 In the results, you can see a node named `resultSet`, an array of objects. Each object represents a record returned by the query, and is a map (key-value) of all the fields in the record. The key is the field name, as returned by the database, and the value is the (typed) field value.
+
+{% hint style="info" %}
+(Since v0.16) The map is ordered according to the order of the fields that was returned by the engine. As a map, in JSON, is unordered (in general), a list with the ordered headers is included (`resultHeaders`).
+{% endhint %}
 
 Notice that we selected for `*`, so the database auto-assigned the keys to the name of the fields.
 
@@ -121,3 +127,21 @@ But this statement had two sets of values passed to it, a batch. We can see that
 ```
 
 So, the server returns a "rows updated" count for every item of the batch, aka for each iteration of the statement.
+
+### `List` format for ResultSets
+
+`Since v0.16`
+
+As we saw [in the request](requests.md#result-format), `list` can be specified as the result set format. In that case, any output node that contains a result would be in the form:
+
+```json
+        {
+            "success": true,
+            "resultHeaders": [ "ID", "VAL" ],
+            "resultSetList": [
+                [ 1, "ONE" ]
+            ]
+        },
+```
+
+Notice that `resultSetList` takes place of `resultSet`.

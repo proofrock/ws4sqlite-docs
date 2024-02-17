@@ -1,5 +1,9 @@
 # 🚄 Performances
 
+{% hint style="warning" %}
+This page is quite outdated. New, more complete measurements are needed. Help appreciated ;-)
+{% endhint %}
+
 ws4sqlite v0.9.1 with Apache JMeter. Debian Linux system, Azure Standard B2s (2 vcpus).
 
 Tested with 100, 1000, ... concurrent requests. Single SELECT on a file-based database, by primary key, on a 2000-records table. Fits in cache, WAL mode (not read only).
