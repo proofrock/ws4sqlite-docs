@@ -4,6 +4,8 @@ description: Query sqlite via http - and remote clients too!
 
 # 🌱 Introduction & Credits
 
+> *📢 This project's next version was forked, that will support more databases than sqlite (hence the new name, if you noticed 😉). It will take some time, through improvements and, alas, breaking changes. The development is happening in the [`fork/ws4sql`](https://github.com/proofrock/ws4sqlite/tree/fork/ws4sql) branch, and you can find the changes and the steps needed to migrate a regular installation in the [ROAD_TO_WS4SQL.md](https://github.com/proofrock/ws4sqlite/blob/fork/ws4sql/ROAD_TO_WS4SQL.md) document.*
+
 > _I recently started a_ [_discussion_](https://github.com/proofrock/ws4sqlite/discussions/44) _over the future direction for this project. Take a look, and chip in if you want!_
 
 ## 🌱 Introduction & Credits
